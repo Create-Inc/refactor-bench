@@ -1,0 +1,5 @@
+{
+  "name": "cv_builder",
+  "description": "CV/Resume builder with dynamic content",
+  "appType": "web"
+}

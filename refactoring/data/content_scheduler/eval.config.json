@@ -1,0 +1,5 @@
+{
+  "name": "content_scheduler",
+  "description": "Large React social media content scheduler refactoring (~17K tokens) with calendar grid, multi-platform post scheduling, draft management, analytics dashboard, drag-and-drop rescheduling, platform-specific validation, and deeply interconnected derived state via useMemo chains",
+  "appType": "web"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "admin_panel",
+  "description": "Mobile admin panel with CRUD operations",
+  "appType": "mobile"
+}

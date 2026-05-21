@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/useGroceryActions.js",
+  "testFile": "useGroceryActions.test.js"
+}

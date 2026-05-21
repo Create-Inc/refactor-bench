@@ -1,0 +1,5 @@
+{
+  "name": "health_clinic_booking",
+  "description": "Large React health clinic management app with multi-step patient intake form (3-step wizard with validation), appointment booking with time slot conflict detection, patient records with search/filter, doctor profiles with specialty filtering, visit notes with vitals, appointment status workflow (pending/confirmed/completed/cancelled), and theme toggling — all with localStorage persistence (~17K tokens)",
+  "appType": "web"
+}

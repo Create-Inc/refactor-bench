@@ -1,0 +1,5 @@
+{
+  "name": "ai_code_mode",
+  "description": "AI code generation mode with diff handling and file operations",
+  "appType": "web"
+}

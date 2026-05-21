@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/[groupId].jsx",
+  "testFile": "[groupId].test.jsx"
+}

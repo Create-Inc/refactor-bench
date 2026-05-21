@@ -1,0 +1,5 @@
+{
+  "name": "event_registration",
+  "description": "Large React multi-step event registration form refactoring (~16K tokens) with 5-step wizard flow (event selection, attendees, preferences, payment, review), complex cross-step validation, discount code logic, dynamic attendee management (add/remove/duplicate), conditional form fields based on event type, payment formatting, localStorage draft persistence, and order total calculation with tax and discounts",
+  "appType": "web"
+}

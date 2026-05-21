@@ -1,0 +1,5 @@
+{
+  "name": "ecommerce_storefront",
+  "description": "Large React e-commerce storefront refactoring (~17K tokens)",
+  "appType": "web"
+}

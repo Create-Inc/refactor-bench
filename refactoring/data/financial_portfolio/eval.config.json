@@ -1,0 +1,5 @@
+{
+  "name": "financial_portfolio",
+  "description": "Large React financial portfolio analytics dashboard refactoring (~17K tokens) with portfolio overview, holdings table, transaction history, watchlist, allocation charts, performance metrics, alerts, and multi-filter search",
+  "appType": "web"
+}

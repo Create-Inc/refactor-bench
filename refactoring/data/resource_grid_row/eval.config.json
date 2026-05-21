@@ -1,0 +1,5 @@
+{
+  "name": "resource_grid_row",
+  "description": "Resource allocation grid row with drag-and-drop scheduling",
+  "appType": "web"
+}

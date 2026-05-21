@@ -1,0 +1,5 @@
+{
+  "name": "social_media_feed",
+  "description": "Large React social media feed app refactoring (~17K tokens) with posts, comments, likes, bookmarks, user profiles, notifications, direct messages, stories, follow/unfollow, search, and trending topics",
+  "appType": "web"
+}

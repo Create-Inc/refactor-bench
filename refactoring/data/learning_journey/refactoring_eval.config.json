@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/[assignmentId].jsx",
+  "testFile": "[assignmentId].test.jsx"
+}

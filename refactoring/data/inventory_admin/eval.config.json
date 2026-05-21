@@ -1,0 +1,5 @@
+{
+  "name": "inventory_admin",
+  "description": "Large React inventory management admin panel refactoring (~17K tokens) with product CRUD, category management, supplier tracking, stock alerts, order history, analytics dashboard, and multi-filter table views",
+  "appType": "web"
+}

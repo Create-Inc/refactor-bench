@@ -1,0 +1,5 @@
+{
+  "name": "video_streaming_platform",
+  "description": "Large React video streaming platform refactoring (~17K tokens) with video player controls, playlist management, watch history, search and genre filtering, queue system, video detail modal, like/dislike ratings, and dark/light theme toggling",
+  "appType": "web"
+}

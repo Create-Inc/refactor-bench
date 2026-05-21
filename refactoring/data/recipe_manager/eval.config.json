@@ -1,0 +1,5 @@
+{
+  "name": "recipe_manager",
+  "description": "Large React Native recipe management app refactoring (~17K tokens) with recipe browsing, meal planning, shopping list, favorites, cooking timer, and category filtering — first mobile appType fixture in refactoring evals",
+  "appType": "mobile"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "collaborative_doc_editor",
+  "description": "Large React collaborative document editor refactoring (~17K tokens) with rich text toolbar, document list sidebar, version history, collaborator presence indicators, auto-save with debounce, comments/annotations, word count, and export functionality",
+  "appType": "web"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "real_estate_listings",
+  "description": "Large React real estate listings app refactoring (~17K tokens) with property search, multi-faceted filters (type, status, price range, bedrooms, bathrooms, neighborhood, amenities), grid/list/map views, favorites, property comparison, saved searches, mortgage calculator, detail modal with image gallery, contact agent workflow, pagination, sorting, and theme toggling",
+  "appType": "web"
+}

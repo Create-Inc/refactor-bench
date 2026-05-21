@@ -1,0 +1,5 @@
+{
+  "name": "enhanced_chat_screen",
+  "description": "Enhanced chat screen with message history, typing indicators, and reactions",
+  "appType": "web"
+}

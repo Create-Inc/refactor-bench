@@ -1,0 +1,5 @@
+{
+  "name": "basic_web_with_auth",
+  "description": "Auth adapter with database CRUD, credential sign-in/sign-up, session management, and argon2 password hashing",
+  "appType": "web"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "meal_planner_mobile",
+  "description": "Large React Native meal planning app refactoring (~17K tokens) with recipe browsing, weekly meal calendar, grocery list generation, nutrition tracking, favorites, and search/filter — first mobile (appType: mobile) fixture in refactoring evals",
+  "appType": "mobile"
+}

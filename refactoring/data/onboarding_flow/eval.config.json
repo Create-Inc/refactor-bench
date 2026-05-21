@@ -1,0 +1,5 @@
+{
+  "name": "onboarding_flow",
+  "description": "Multi-step user onboarding flow with profile setup",
+  "appType": "web"
+}

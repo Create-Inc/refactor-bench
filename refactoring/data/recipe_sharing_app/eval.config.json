@@ -1,0 +1,5 @@
+{
+  "name": "recipe_sharing_app",
+  "description": "Large React Native recipe sharing app refactoring (~17K tokens) with recipe browsing, category filtering, search, favorites, recipe detail with ingredients/steps, cooking timer, meal planner, shopping list, and user profile — first mobile (React Native) fixture in the refactoring eval set",
+  "appType": "mobile"
+}

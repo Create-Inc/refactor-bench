@@ -1,0 +1,5 @@
+{
+  "name": "game_results_handler",
+  "description": "Game results processing with scoring, statistics, and leaderboard updates",
+  "appType": "mobile"
+}

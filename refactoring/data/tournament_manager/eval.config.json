@@ -1,0 +1,5 @@
+{
+  "name": "tournament_manager",
+  "description": "Tournament creation and bracket management",
+  "appType": "mobile"
+}

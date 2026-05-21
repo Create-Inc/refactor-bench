@@ -1,0 +1,5 @@
+{
+  "name": "online_marketplace",
+  "description": "Large React e-commerce marketplace refactoring (~17K tokens) with product catalog, shopping cart, wishlist, checkout flow, order history, product reviews, seller profiles, category/price/rating filters, search, and localStorage-persisted state across all domains",
+  "appType": "web"
+}

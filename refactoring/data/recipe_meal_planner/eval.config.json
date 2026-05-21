@@ -1,0 +1,5 @@
+{
+  "name": "recipe_meal_planner",
+  "description": "Large React recipe/meal planner app refactoring (~1200 lines) with recipe CRUD, meal plan calendar, shopping list generation, and nutrition tracking",
+  "appType": "web"
+}

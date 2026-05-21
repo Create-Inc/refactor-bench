@@ -1,0 +1,5 @@
+{
+  "name": "financial_analytics_dashboard",
+  "description": "Large React financial analytics dashboard refactoring (~17K tokens) with revenue/expense tracking, multi-chart visualizations (bar, line, pie, area), date range filtering, computed KPIs, drill-down transaction tables, category breakdowns, budget vs actuals comparison, CSV/PDF export, and localStorage-persisted settings — tests the agent's ability to refactor a data-transformation-heavy single-file app with deeply interconnected computed state, multiple aggregation pipelines, and cross-cutting filter logic",
+  "appType": "web"
+}

@@ -1,0 +1,8 @@
+model_provider,model,paired_fixtures,enabled_passes,disabled_passes,both_pass,enabled_only,disabled_only,both_fail,pass_rate_delta_pp,mcnemar_discordant,mcnemar_exact_p
+anthropic-sonnet-4.6,Sonnet 4.6,123,29,17,16,13,1,93,9.8,14,0.001831
+anthropic-opus-4.6,Opus 4.6,123,28,21,20,8,1,94,5.7,9,0.03906
+anthropic-opus-4.7,Opus 4.7,123,17,16,16,1,0,106,0.8,1,1.000
+google-2.0-flash,Gemini 2.0 Flash,123,13,16,12,1,4,106,-2.4,5,0.3750
+google-2.5-flash,Gemini 2.5 Flash,123,18,15,14,4,1,104,2.4,5,0.3750
+google-2.5-pro,Gemini 2.5 Pro,123,21,22,16,5,6,96,-0.8,11,1.000
+google-3.0-pro,Gemini 3.0 Pro,123,31,22,22,9,0,92,7.3,9,0.003906

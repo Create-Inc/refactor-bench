@@ -1,0 +1,5 @@
+{
+  "name": "course_platform",
+  "description": "Large React learning management system / course platform refactoring (~18K tokens) with catalog, enrollment, progress tracking, lesson player, bookmarks, notes, reviews, certificates, and instructor profiles",
+  "appType": "web"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "community_forum",
+  "description": "Large React community forum / discussion board refactoring (~17K tokens) with category browsing, thread creation, nested comments with voting, user profiles, bookmarks, moderation tools, search, and tag filtering",
+  "appType": "web"
+}

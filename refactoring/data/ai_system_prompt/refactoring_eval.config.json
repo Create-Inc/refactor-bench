@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/systemPrompt.js",
+  "testFile": "systemPrompt.test.js"
+}

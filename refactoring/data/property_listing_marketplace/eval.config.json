@@ -1,0 +1,5 @@
+{
+  "name": "property_listing_marketplace",
+  "description": "Large React property listing marketplace refactoring (~17K tokens) with grid/list/map views, multi-filter search, price range slider, favorites, property comparison, inquiry form, agent profiles, and pagination",
+  "appType": "web"
+}

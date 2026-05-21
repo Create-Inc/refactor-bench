@@ -1,0 +1,5 @@
+{
+  "name": "job_board_platform",
+  "description": "Large React hiring/job board platform refactoring (~15K tokens) with async data fetching, multi-view dashboard (job listings, applications, pipeline, analytics), cross-domain data transformations, and deeply interconnected state",
+  "appType": "web"
+}

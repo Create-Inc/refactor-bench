@@ -1,0 +1,5 @@
+{
+  "name": "departments_settings",
+  "description": "Department management settings with hierarchy and permissions",
+  "appType": "web"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "event_conference_manager",
+  "description": "Large React event/conference management platform refactoring (~17K tokens) with multi-entity CRUD (speakers, sessions, attendees, venues), cross-entity relational data, schedule conflict detection, feedback system, and 6 distinct views",
+  "appType": "web"
+}

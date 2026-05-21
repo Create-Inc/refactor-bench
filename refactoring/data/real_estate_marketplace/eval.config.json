@@ -1,0 +1,5 @@
+{
+  "name": "real_estate_marketplace",
+  "description": "Large React real estate marketplace refactoring (~1400 lines) with property listings, multi-criteria search and filtering (type, location, status, bedrooms, price range), grid/list view toggling, saved/favorites, property comparison, mortgage calculator, image gallery, agent contact form, analytics dashboard, and theme toggling",
+  "appType": "web"
+}

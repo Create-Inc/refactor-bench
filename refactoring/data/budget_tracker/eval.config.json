@@ -1,0 +1,5 @@
+{
+  "name": "budget_tracker",
+  "description": "Large React personal finance and budget tracking dashboard refactoring (~17K tokens) with multi-view navigation (dashboard, transactions, budgets, accounts, reports), transaction CRUD with category/account/type filtering, budget tracking with progress bars and over-budget alerts, account management with inline editing, financial reports with spending breakdowns, recurring expense tracking, CSV export, notifications, dark mode, and localStorage persistence across 5 distinct data domains",
+  "appType": "web"
+}

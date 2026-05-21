@@ -1,0 +1,5 @@
+{
+  "name": "expense_tracker",
+  "description": "Large TypeScript (TSX) personal finance / expense tracker dashboard refactoring (~17K tokens) with typed interfaces, union types, multi-view navigation, budget tracking, account management, analytics, and settings persistence",
+  "appType": "web"
+}

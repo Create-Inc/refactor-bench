@@ -1,0 +1,5 @@
+{
+  "name": "dfs_graph",
+  "description": "Depth-first search graph traversal refactoring",
+  "appType": "web"
+}

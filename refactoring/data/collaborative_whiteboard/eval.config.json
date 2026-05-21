@@ -1,0 +1,5 @@
+{
+  "name": "collaborative_whiteboard",
+  "description": "Large React collaborative whiteboard/drawing app refactoring (~1400 lines) with canvas drawing, shape tools, freehand pen, text annotations, layer management, undo/redo, color/stroke picker, zoom/pan, grid snapping, export, and multi-user presence indicators",
+  "appType": "web"
+}

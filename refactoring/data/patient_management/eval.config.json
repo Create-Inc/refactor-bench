@@ -1,0 +1,5 @@
+{
+  "name": "patient_management",
+  "description": "Healthcare patient management dashboard with patient records, appointment scheduling, vital signs tracking, prescriptions, billing, and medical history — exercises complex form validation, computed derived state (BMI, age, risk scores), cross-entity data relationships, and multi-modal CRUD workflows in a single ~1400-line file (~17K tokens)",
+  "appType": "web"
+}

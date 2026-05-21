@@ -1,0 +1,5 @@
+{
+  "name": "payments_hub",
+  "description": "School payment management hub with invoicing and tracking",
+  "appType": "web"
+}

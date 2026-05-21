@@ -1,0 +1,5 @@
+{
+  "name": "fitness_tracker",
+  "description": "Large React health & fitness tracker dashboard refactoring (~17K tokens) with workout logging, nutrition tracking, body measurements, goal setting, activity history, and multi-view dashboard with derived stats, charts, and cross-domain data",
+  "appType": "web"
+}

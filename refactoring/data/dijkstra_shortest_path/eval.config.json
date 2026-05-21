@@ -1,0 +1,5 @@
+{
+  "name": "dijkstra_shortest_path",
+  "description": "Dijkstra's shortest path algorithm refactoring",
+  "appType": "web"
+}

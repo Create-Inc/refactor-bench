@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/page.tsx",
+  "testFile": "page.test.js"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "social_media_app",
+  "description": "Large React Native social media feed app refactoring (~17K tokens) with feed, stories, user profiles, messaging inbox, notifications, post creation, likes/comments, bookmarks, search/discover, and settings — first mobile appType fixture in refactoring evals",
+  "appType": "mobile"
+}

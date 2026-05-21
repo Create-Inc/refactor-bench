@@ -1,0 +1,5 @@
+{
+  "name": "property_management",
+  "description": "Large React property management / tenant portal refactoring (~17K tokens) with multi-entity data model (properties, units, tenants, leases, payments, maintenance requests), financial dashboards, date-range filtering, and cross-entity computed metrics",
+  "appType": "web"
+}

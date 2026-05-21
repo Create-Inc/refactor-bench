@@ -1,0 +1,5 @@
+{
+  "name": "survey_quiz_builder",
+  "description": "Large React survey/quiz builder and response viewer (~17K tokens) with multiple question types (text, multiple choice, checkbox, rating, dropdown), quiz mode with scoring, conditional branching, drag-and-drop reorder, response collection, results analytics with charts, import/export, and dark mode",
+  "appType": "web"
+}

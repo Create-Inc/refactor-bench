@@ -1,0 +1,5 @@
+{
+  "name": "realtime_chat_app",
+  "description": "Large React real-time chat/messaging app refactoring (~16K tokens) with conversations, messages, reactions, replies, forwarding, user profiles, group management, typing indicators, and settings",
+  "appType": "web"
+}

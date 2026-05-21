@@ -1,0 +1,5 @@
+{
+  "name": "flight_booking_modal",
+  "description": "Flight booking modal with search, seat selection, and payment",
+  "appType": "web"
+}

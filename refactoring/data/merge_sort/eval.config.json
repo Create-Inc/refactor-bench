@@ -1,0 +1,5 @@
+{
+  "name": "merge_sort",
+  "description": "Merge sort algorithm implementation refactoring",
+  "appType": "web"
+}

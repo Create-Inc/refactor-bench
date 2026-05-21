@@ -1,0 +1,677 @@
+\documentclass[11pt,letterpaper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{authblk}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=blue!70!black,
+  urlcolor=blue!70!black
+}
+
+% --- Title ---
+\title{\textbf{RefactorBench-JS: Evaluating LLM Agents on\\Behavior-Preserving Code Decomposition}}
+
+\author[1]{Daniel Chen}
+\affil[1]{Anything, Inc.}
+\date{}
+
+\begin{document}
+\maketitle
+
+% --- Abstract ---
+\begin{abstract}
+We introduce \textsc{RefactorBench}-JS, an open benchmark suite for measuring the ability of LLM agents to perform behavior-preserving code decomposition in JavaScript and React codebases. The benchmark consists of 123 scored fixtures---spanning algorithmic logic, data modules, utility/API logic, web UI, and mobile UI---each paired with a hidden unit test suite: hidden from the agent during evaluation, then released publicly for auditability. An agent's task is to refactor a given file into smaller, well-structured modules; its output is scored by executing the hidden tests against the refactored filesystem, directly measuring whether observable behavior was preserved. This design is grounded in a simple principle: \emph{behavioral preservation is a functional property, and functional properties are best verified by functional tests}---not by code similarity metrics, static analysis, or LLM-as-judge.
+
+We demonstrate \textsc{RefactorBench}-JS by evaluating Anthropic Claude and Google Gemini models across two tool configurations. The benchmark reveals model-dependent tool effects, large gaps between agent-reported success and actual behavioral preservation, and distinct failure modes across model families. We report hidden-test pass rates, calibration, operational metadata, and a failure taxonomy. These findings informed model and tool selection in a production refactoring system whose observed success rate improved from approximately $65\%$ to above $97\%$ amid multiple engineering changes; this production result is observational, not a controlled causal estimate. \textsc{RefactorBench}-JS is publicly available at \url{https://github.com/Create-Inc/refactor-bench}.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Keywords:} benchmark, code refactoring, large language models, tool augmentation, agentic evaluation
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+Automated code refactoring---restructuring code without changing its observable behavior---is an increasingly common task delegated to LLM-based agents. Yet evaluating whether an agent has actually preserved behavior remains an open problem. Existing approaches rely on metrics that are either too weak (compilation success, file count) or misaligned with the task (code similarity, LLM-as-judge). These metrics can show encouraging numbers even when the refactored code is functionally broken.
+
+We encountered this problem firsthand while building an automated refactoring subagent for a commercial AI application builder. The subagent decomposes large React files into smaller modules to prevent downstream failures in speculative editing. Early evaluation using compilation success and file count metrics showed steady improvement---yet users reported broken applications after automatic refactoring. We could not distinguish a refactoring that compiled but broke behavior from one that was genuinely correct.
+
+The solution was conceptually simple: \emph{behavioral preservation is a functional property, and functional properties are best verified by functional tests}. We constructed a set of files paired with hidden unit test suites, invisible to the refactoring agent, that exercise each file's observable behavior. After refactoring, the hidden tests are executed against the refactored filesystem. If they pass, behavior was preserved; if they fail, it was not.
+
+This paper introduces \textsc{RefactorBench}-JS, the public release of this evaluation suite. Our contributions are:
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Benchmark release}: \textsc{RefactorBench}-JS is an open benchmark of 123 scored JavaScript/React fixtures with hidden test suites, released at \url{https://github.com/Create-Inc/refactor-bench}.
+
+\item \textbf{A behavior-grounded evaluation design}: we adapt the established software-engineering principle of functional regression testing to LLM refactoring agents, and contrast executable hidden tests with code similarity metrics, static analysis, and LLM-as-judge.
+
+\item \textbf{Baseline results, calibration, and failure analysis}: we evaluate seven frontier and fast models across two tool configurations and report hidden-test pass rates, agent self-evaluation calibration, operational cost/latency metadata, and failure buckets.
+\end{enumerate}
+
+% ============================================================
+\section{Motivation: Refactoring in AI Code Generation}
+\label{sec:motivation}
+% ============================================================
+
+To ground \textsc{RefactorBench}-JS in a concrete use case, we briefly describe the production system that motivated its creation.
+
+\subsection{The Speculative Editing Bottleneck}
+
+Modern AI application builders use a \emph{base agent} to generate code edits, which are applied to existing files via \emph{speculative editing} (also called \emph{fast apply}). This merge step has a practical constraint: when a file exceeds approximately 16{,}000 tokens, speculative editing begins to fail, producing malformed merges. To manage file size, a \emph{refactoring subagent} is invoked automatically when a file crosses 8{,}000 tokens. Its task is to decompose the file into smaller modules while preserving behavior.
+
+\subsection{Why Evaluation Was the Bottleneck}
+
+The refactoring subagent is implemented as a multi-turn tool-calling agent. It was straightforward to equip it with tools (file writing, build checking, test execution, a termination signal) and iterate on prompts. The bottleneck was \emph{evaluation}: without a reliable signal for behavioral preservation, every design decision---model selection, tool configuration, prompt changes---was made in the dark. Compilation success showed a system that appeared to work. Users showed a system that did not.
+
+Critically, subagent quality propagates: the worse the refactoring subagent performs, the more likely the base agent must spend additional turns---using a more expensive frontier model---diagnosing and repairing the damage. A cheap but unreliable subagent is a false economy. This dynamic made reliable evaluation not just desirable but essential.
+
+This experience motivated the construction of the hidden-test evaluation suite, which we now release as \textsc{RefactorBench}-JS so that other teams building refactoring agents can avoid the same trap.
+
+% ============================================================
+\section{The \textsc{RefactorBench}-JS Benchmark}
+\label{sec:benchmark}
+% ============================================================
+
+\subsection{Design Principles}
+
+\textsc{RefactorBench}-JS is built on three design principles:
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Functional evaluation.} The primary metric is whether hidden unit tests pass after refactoring, directly measuring behavioral preservation. Structural metrics (file count, compilation, code similarity) are recorded but are secondary.
+
+\item \textbf{Hidden holdout tests.} The test suites are never provided to the refactoring agent. The agent may write and execute its own tests using a test runner tool, but these are distinct from the holdout suite. This separation serves two purposes. First, it prevents the agent from optimizing directly for the evaluation criteria. Second, the hidden tests are designed to cover behaviors that a self-testing agent is unlikely to verify on its own: multi-step user interaction flows (register $\rightarrow$ search $\rightarrow$ chat $\rightarrow$ send), browser API side effects (localStorage persistence across theme toggles), and cross-validation of multiple algorithm implementations against each other. In practice, agents' self-written tests tend to be shallow smoke tests (``component renders without crashing''), whereas the hidden suites exercise deeper behavioral invariants.
+
+\item \textbf{Domain diversity.} The corpus spans pure algorithms, data modules, utility/API logic, React web components with complex state management, and React Native mobile components at varying complexity levels.
+\end{enumerate}
+
+\subsection{Corpus}
+
+The benchmark consists of 123 scored fixtures, each in its own directory with a consistent structure:
+
+\begin{verbatim}
+  refactoring/data/<name>/
+    eval.config.json              # app metadata (name, type)
+    refactoring_eval.config.json
+    src/
+    *.test.js
+\end{verbatim}
+
+Table~\ref{tab:corpus} summarizes the corpus by platform metadata recorded in the repository.
+
+\begin{table}[ht]
+\centering
+\caption{\textsc{RefactorBench}-JS corpus summary. LOC = physical line count in the target file, counted by newline splitting. The full fixture inventory is the repository's \texttt{refactoring/data/} directory.}
+\label{tab:corpus}
+\small
+\begin{tabularx}{\textwidth}{lrrX}
+\toprule
+\textbf{Platform} & \textbf{Fixtures} & \textbf{LOC range} & \textbf{Representative behaviors tested} \\
+\midrule
+Web / JavaScript & 90 & 48--4{,}218   & Algorithms, data modules, APIs, rendering, events, browser APIs \\
+Mobile / React Native & 33 & 227--2{,}597 & Navigation, gestures, native APIs, modals, mobile state flows \\
+\midrule
+\textbf{Total}  & \textbf{123} & \textbf{48--4{,}218} & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The corpus deliberately spans several complexity regimes:
+
+\paragraph{Algorithm files.} These test whether the agent preserves pure functional behavior---input--output contracts, algorithmic correctness, and data structure invariants---during decomposition. The hidden tests exercise edge cases (empty inputs, single elements, large inputs) and cross-validate multiple implementations of the same algorithm (e.g., multiple Fibonacci implementations that must produce identical results).
+
+\paragraph{Data module files.} These test preservation of exported data structures, configuration objects, and generator functions. Hidden tests verify data integrity: required fields, unique IDs, value type constraints, and cross-referential consistency.
+
+\paragraph{Utility / API files.} These bridge the gap between pure algorithms and full UI components, testing server-side API routes, command processors, custom hooks, and business logic handlers. Hidden tests mock external dependencies (database clients, auth, fetch) and verify request handling, validation rules, error responses, and state transitions.
+
+\paragraph{React web component files.} These test preservation of UI rendering, event handling, state management, and browser API interactions. Larger fixtures include authentication flows, real-time messaging, theme toggling with localStorage persistence, and developer badge systems. The hidden tests exercise full user flows: register $\rightarrow$ search $\rightarrow$ select chat $\rightarrow$ send message.
+
+\paragraph{React Native mobile files.} These test mobile-specific patterns: navigation, gesture handling, native module interactions, and platform-specific layouts. Files span domains including sports scheduling, financial services, grocery shopping, games, and social features.
+
+\subsection{Hidden Test Suite Design}
+
+Hidden test suites were written or reviewed to follow these guidelines:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Test observable behavior.} Assert on rendered output, return values, state transitions, and side effects---not internal structure. This makes the tests invariant under correct refactoring.
+\item \textbf{Cover edge cases.} Include empty inputs, boundary conditions, error handling, and multi-step interaction flows.
+\item \textbf{Use stable selectors.} For React components, test by text content, role, and semantic structure rather than CSS classes or internal component names, which refactoring may change.
+\end{itemize}
+
+For algorithm files, tests use Jest-style assertions on function return values. For React components, tests use React Testing Library with user-event for interaction simulation.
+
+\subsection{Scoring}
+
+\textsc{RefactorBench}-JS produces five scores per refactoring attempt:
+
+\begin{table}[ht]
+\centering
+\caption{Scoring metrics.}
+\label{tab:scores}
+\small
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Score} & \textbf{Type} & \textbf{Description} \\
+\midrule
+Passes Tests & Binary & Do the hidden holdout tests pass against the refactored filesystem? \emph{Primary metric.} \\
+Agent Reported Success & Binary & Did the agent signal success via its termination tool? \\
+Non-Triviality & Binary & Did the refactoring produce new files (not a no-op)? \\
+Files Compiled & $[0,1]$ & $1 - (\text{build errors} / \text{total files})$. \\
+Cost & \$ & Total LLM cost in dollars. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The \emph{Passes Tests} and \emph{Agent Reported Success} scores can diverge: an agent may signal success while the hidden tests reveal regressions. This divergence rate measures the agent's self-evaluation calibration---an important safety-relevant property for autonomous coding agents.
+
+% ============================================================
+\section{Why Hidden Functional Tests}
+\label{sec:why-hidden}
+% ============================================================
+
+The choice of evaluation methodology is not incidental---it determines what findings are possible. We contrast the hidden-test approach with alternatives:
+
+\paragraph{vs.\ Code similarity (BLEU, CodeBLEU, edit distance).} Refactoring \emph{should} change code structure significantly. High similarity to the original may indicate the agent did nothing useful. Low similarity is expected and desirable, provided behavior is preserved. Metrics such as CodeBLEU~\citep{ren2020codebleu} were designed for code generation, but for refactoring the desired output may be structurally different from the input while remaining behaviorally equivalent.
+
+\paragraph{vs.\ LLM-as-judge.} LLM-as-judge methods can approximate human preference judgments in open-ended settings~\citep{zheng2023judging}, but using another LLM to evaluate refactoring quality introduces model-specific biases and makes it difficult to distinguish genuine behavioral preservation from superficial plausibility. More fundamentally, an LLM judge must itself be evaluated: if we rely on a model's judgment of behavioral preservation, we need evidence that the judge is reliable on that exact task. This creates a recursive evaluation problem unless the judge is anchored to an external ground-truth signal. Hidden tests provide that signal directly. They also detect subtle regressions (e.g., a missing event handler, an off-by-one in a loop) with the precision of executable assertions.
+
+\paragraph{vs.\ Static analysis only.} Compilation success is necessary but not sufficient. A file can compile perfectly while rendering nothing, or while having broken event handlers. In our production system, compilation-based metrics consistently overstated quality.
+
+\paragraph{vs.\ Agent self-reported success.} The agent's own judgment of success is unreliable (Section~\ref{sec:baselines}). An agent that reports 90\% success while achieving 60\% behavioral preservation is more dangerous than one that honestly reports failure, because it undermines trust in the overall system.
+
+The hidden-test approach is not novel in software engineering---\citet{opdyke1992refactoring}, \citet{griswold1993automated}, and \citet{fowler1999refactoring} established behavioral preservation as the correctness criterion for refactoring, and SafeRefactor-style systems use tests to detect behavioral changes~\citep{soares2013automated}. \textsc{RefactorBench}-JS adapts this principle to the LLM agent setting, where the refactoring agent is a stochastic black box rather than a deterministic program transformation.
+
+% ============================================================
+\section{Baseline Results}
+\label{sec:baselines}
+% ============================================================
+
+To demonstrate \textsc{RefactorBench}-JS and establish initial baselines, we evaluate Anthropic Claude and Google Gemini models across two tool configurations.
+
+\subsection{Agent Configuration}
+
+The refactoring agent is a multi-turn completion agent with the following tools: \texttt{write\_file} (create/update files), \texttt{remove\_file} (delete files), \texttt{get\_all\_errors} (compilation error checking with pre-existing error filtering), and \texttt{finish\_refactoring} (termination signal). The \texttt{run\_unit\_test} tool (execute a test file via Vitest or Jest) is toggled as the experimental variable.
+
+All agents use temperature~0, \texttt{tool\_choice=required}, a maximum of 50 tool calls per attempt, and up to 3 retry attempts with fresh conversation state. The system prompt includes the target file's content, platform conventions, import alias rules, and few-shot examples of correct refactoring.
+
+The public repository contains the benchmark fixtures, hidden tests, paper source, and sanitized result data. It does not include our private production agent harness or proprietary system prompts; external users can evaluate \textsc{RefactorBench}-JS by applying their own refactoring harness to the committed fixtures and scoring against the hidden tests.
+
+\subsection{Experimental Design}
+
+We evaluate a $7 \times 2$ factorial design:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Models:} Anthropic Claude Sonnet~4.6, Anthropic Claude Opus~4.6, Anthropic Claude Opus~4.7, Google Gemini~2.0~Flash, Google Gemini~2.5~Flash, Google Gemini~2.5~Pro, Google Gemini~3.0~Pro
+\item \textbf{Tool:} Test runner enabled vs.\ disabled
+\end{itemize}
+
+Each condition is evaluated on the same 123 fixtures with hidden tests. Because every condition runs on the same fixtures, file complexity is controlled by design.
+Model names are reported using the provider/routing aliases recorded by the eval store at run time; the sanitized result files preserve those aliases along with source export identifiers and timestamps. Reproducing baseline rows requires matching the model snapshot, harness settings, tool set, retry policy, and scoring runtime.
+
+\subsection{Results}
+
+Table~\ref{tab:results} reports the primary results with 95\% Wilson score confidence intervals~\citep{wilson1927probable} on the ``Passes Tests'' rate.
+
+\begin{table}[ht]
+\centering
+\caption{Baseline results on the full \textsc{RefactorBench}-JS run ($n=123$ fixtures per condition). ``Passes Tests'' is the number of fixtures whose hidden tests pass after refactoring. 95\% Wilson score CIs are reported on the pass rate. Duration is wall-clock time per fixture in minutes.}
+\label{tab:results}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccc}
+\toprule
+\textbf{Model} & \textbf{Test Runner} & \textbf{Pass / 123} & \textbf{Rate (95\% CI)} & \textbf{Avg Min} \\
+\midrule
+Sonnet 4.6     & Enabled  & 29  & 23.6\%~~[16.9, 31.8] & 8.9 \\
+Sonnet 4.6     & Disabled & 17  & 13.8\%~~[8.8, 21.0] & 6.6 \\
+Opus 4.6       & Enabled  & 28  & 22.8\%~~[16.2, 30.9] & 12.1 \\
+Opus 4.6       & Disabled & 21  & 17.1\%~~[11.4, 24.7] & 6.7 \\
+Opus 4.7       & Enabled  & 17  & 13.8\%~~[8.8, 21.0] & 7.6 \\
+Opus 4.7       & Disabled & 16  & 13.0\%~~[8.2, 20.1] & 6.5 \\
+\midrule
+Gemini 2.0 Flash & Enabled  & 13  & 10.6\%~~[6.3, 17.2] & 5.5 \\
+Gemini 2.0 Flash & Disabled & 16  & 13.0\%~~[8.2, 20.1] & 4.6 \\
+Gemini 2.5 Flash & Enabled  & 18  & 14.6\%~~[9.5, 21.9] & 7.3 \\
+Gemini 2.5 Flash & Disabled & 15  & 12.2\%~~[7.5, 19.1] & 4.4 \\
+Gemini 2.5 Pro & Enabled  & 21 & 17.1\%~~[11.4, 24.7] & 14.9 \\
+Gemini 2.5 Pro & Disabled & 22 & 17.9\%~~[12.1, 25.6] & 18.9 \\
+Gemini 3.0 Pro & Enabled  & 31  & 25.2\%~~[18.4, 33.5] & 9.5 \\
+Gemini 3.0 Pro & Disabled & 22  & 17.9\%~~[12.1, 25.6] & 13.8 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\noindent\emph{Note on precision}: All conditions use the same 123 fixtures. Wilson score intervals are reported to make marginal sampling uncertainty explicit; Table~\ref{tab:paired-tool-effect} additionally reports paired test-runner comparisons on the same fixture set. The Gemini~3.0~Pro enabled row includes one explicit terminal failure for a fixture that repeatedly terminated before exporting a result; it is counted as a failed refactoring. The Sonnet~4.6 disabled row completed with all 123 hidden-test scores exported, despite the cloud wrapper returning a late termination error after result export.
+
+\begin{table}[ht]
+\centering
+\caption{Paired test-runner effect by model. ``Enabled-only'' counts fixtures that passed only when the test runner tool was available; ``disabled-only'' counts fixtures that passed only without it. $p$ is a two-sided exact McNemar/binomial test over discordant fixture pairs.}
+\label{tab:paired-tool-effect}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Model} & \textbf{$\Delta$ pp} & \textbf{Enabled-only} & \textbf{Disabled-only} & \textbf{$p$} \\
+\midrule
+Sonnet 4.6 & +9.8 & 13 & 1 & 0.0018 \\
+Opus 4.6 & +5.7 & 8 & 1 & 0.0391 \\
+Opus 4.7 & +0.8 & 1 & 0 & 1.0000 \\
+Gemini 2.0 Flash & -2.4 & 1 & 4 & 0.3750 \\
+Gemini 2.5 Flash & +2.4 & 4 & 1 & 0.3750 \\
+Gemini 2.5 Pro & -0.8 & 5 & 6 & 1.0000 \\
+Gemini 3.0 Pro & +7.3 & 9 & 0 & 0.0039 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent These paired tests are reported as model-level diagnostics rather than a multiplicity-adjusted family of confirmatory hypotheses.
+
+\subsection{Agent Calibration}
+
+Table~\ref{tab:calibration} reports the divergence between agent-reported success (the agent signaled completion via \texttt{finish\_refactoring} with \texttt{success=true}) and actual behavioral preservation (hidden tests pass). The \emph{false confidence rate}---the fraction of agent-reported successes that fail hidden tests---measures how much the agent overestimates its own correctness.
+
+\begin{table}[ht]
+\centering
+\caption{Agent calibration on the full run. ``Reported'' = agent signaled success. ``Actual'' = hidden tests pass. ``False-confidence failures'' are reported-success outcomes whose hidden tests fail; the rate divides that count by reported successes.}
+\label{tab:calibration}
+\small
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Model} & \textbf{Test Runner} & \textbf{Reported} & \textbf{Actual} & \textbf{False-conf. Fail.} & \textbf{False-conf. \%} \\
+\midrule
+Sonnet 4.6     & Enabled  & 62/123 & 29/123 & 35/123 & 56.5 \\
+Sonnet 4.6     & Disabled & 89/123 & 17/123 & 72/123 & 80.9 \\
+Opus 4.6       & Enabled  & 53/123 & 28/123 & 26/123 & 49.1 \\
+Opus 4.6       & Disabled & 63/123 & 21/123 & 42/123 & 66.7 \\
+Opus 4.7       & Enabled  & 62/123 & 17/123 & 46/123 & 74.2 \\
+Opus 4.7       & Disabled & 60/123 & 16/123 & 45/123 & 75.0 \\
+\midrule
+Gemini 2.0 Flash & Enabled  & 28/123 & 13/123 & 20/123 & 71.4 \\
+Gemini 2.0 Flash & Disabled & 39/123 & 16/123 & 25/123 & 64.1 \\
+Gemini 2.5 Flash & Enabled  & 82/123 & 18/123 & 64/123 & 78.0 \\
+Gemini 2.5 Flash & Disabled & 91/123 & 15/123 & 76/123 & 83.5 \\
+Gemini 2.5 Pro & Enabled  & 108/123 & 21/123 & 88/123 & 81.5 \\
+Gemini 2.5 Pro & Disabled & 107/123 & 22/123 & 86/123 & 80.4 \\
+Gemini 3.0 Pro & Enabled  & 98/123 & 31/123 & 68/123 & 69.4 \\
+Gemini 3.0 Pro & Disabled & 76/123 & 22/123 & 55/123 & 72.4 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\noindent High false confidence rates are practically important: an agent that reports success while breaking behavior is more dangerous than one that honestly reports failure, because downstream systems (and users) will trust the result. A small number of fixtures pass hidden tests even when the agent does not report success; therefore false confidence is computed from the intersection of reported-success and hidden-test outcomes, not by simply subtracting aggregate pass counts.
+
+\subsection{Operational Metadata}
+
+Table~\ref{tab:operational-metadata} reports operational metadata captured by the internal eval store. Costs are measured from the refactoring cost score emitted per fixture; durations are wall-clock times from fixture start to score export. The final column counts fixtures where the agent did not report successful completion, regardless of hidden-test outcome. Turn and tool-call telemetry is also present for the newer exports, but older Anthropic rows predate that telemetry patch, so we omit it from the aggregate table.
+
+\begin{table}[ht]
+\centering
+\caption{Operational metadata for the full \textsc{RefactorBench}-JS run.}
+\label{tab:operational-metadata}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Model} & \textbf{Test Runner} & \textbf{Avg Min} & \textbf{Avg \$/Fixture} & \textbf{Total \$} & \textbf{Non-success} \\
+\midrule
+Sonnet 4.6     & Enabled  & 8.9 & 1.373 & 168.8 & 61 \\
+Sonnet 4.6     & Disabled & 6.6 & 2.907 & 357.5 & 34 \\
+Opus 4.6       & Enabled  & 12.1 & 1.921 & 236.3 & 70 \\
+Opus 4.6       & Disabled & 6.7 & 1.357 & 166.9 & 60 \\
+Opus 4.7       & Enabled  & 7.6 & 2.078 & 255.6 & 61 \\
+Opus 4.7       & Disabled & 6.5 & 1.807 & 222.2 & 63 \\
+\midrule
+Gemini 2.0 Flash & Enabled  & 5.5 & 0.005 & 0.6 & 95 \\
+Gemini 2.0 Flash & Disabled & 4.6 & 0.006 & 0.7 & 84 \\
+Gemini 2.5 Flash & Enabled  & 7.3 & 0.320 & 39.4 & 41 \\
+Gemini 2.5 Flash & Disabled & 4.4 & 0.206 & 25.3 & 32 \\
+Gemini 2.5 Pro & Enabled  & 14.9 & 1.572 & 193.3 & 15 \\
+Gemini 2.5 Pro & Disabled & 18.9 & 1.561 & 192.0 & 16 \\
+Gemini 3.0 Pro & Enabled  & 9.5 & 3.486 & 428.7 & 25 \\
+Gemini 3.0 Pro & Disabled & 13.8 & 2.171 & 267.0 & 47 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Gap to Perfect Behavioral Preservation}
+
+Table~\ref{tab:gap-analysis} decomposes each condition's gap to 100\% hidden-test success. We distinguish reported non-success failures, where the agent did not signal successful completion and the hidden tests failed, from reported-success failures, where the agent signaled success but the hidden tests failed. The latter category is especially important: these are refactorings that would appear complete to an orchestration layer unless hidden tests are run.
+
+\begin{table}[ht]
+\centering
+\caption{Failure-mode decomposition for the gap to 100\% hidden-test success. ``Gap'' is $123-\text{Passes Tests}$. ``Non-success failures'' are failed hidden-test outcomes where the agent did not report successful completion; ``reported-success failures'' are failed hidden-test outcomes where the agent nevertheless reported success.}
+\label{tab:gap-analysis}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Model} & \textbf{Test Runner} & \textbf{Pass} & \textbf{Gap} & \textbf{Non-succ. Fail.} & \textbf{Reported-Succ. Fail.} \\
+\midrule
+Sonnet 4.6     & Enabled  & 29/123 & 94  & 59 & 35 \\
+Sonnet 4.6     & Disabled & 17/123 & 106 & 34 & 72 \\
+Opus 4.6       & Enabled  & 28/123 & 95  & 69 & 26 \\
+Opus 4.6       & Disabled & 21/123 & 102 & 60 & 42 \\
+Opus 4.7       & Enabled  & 17/123 & 106 & 60 & 46 \\
+Opus 4.7       & Disabled & 16/123 & 107 & 62 & 45 \\
+\midrule
+Gemini 2.0 Flash & Enabled  & 13/123 & 110 & 90 & 20 \\
+Gemini 2.0 Flash & Disabled & 16/123 & 107 & 82 & 25 \\
+Gemini 2.5 Flash & Enabled  & 18/123 & 105 & 41 & 64 \\
+Gemini 2.5 Flash & Disabled & 15/123 & 108 & 32 & 76 \\
+Gemini 2.5 Pro & Enabled  & 21/123 & 102 & 14 & 88 \\
+Gemini 2.5 Pro & Disabled & 22/123 & 101 & 15 & 86 \\
+Gemini 3.0 Pro & Enabled  & 31/123 & 92  & 24 & 68 \\
+Gemini 3.0 Pro & Disabled & 22/123 & 101 & 46 & 55 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\noindent The failure modes differ by model class. Smaller Gemini~2.0~Flash configurations are dominated by reported non-success failures, while stronger Gemini~2.5/3.0 configurations more often complete and report success despite failing hidden behavioral tests. This suggests that scaling model capability alone does not eliminate the need for external behavioral verification: the primary residual failure mode shifts from non-success to confident but behaviorally incorrect completion.
+
+\subsection{Error Taxonomy}
+
+To better understand the residual gap, we bucket failed fixture outcomes by the first recognizable failure mode in the structured scorer metadata. This taxonomy is heuristic: it is derived from agent reported-success status, non-triviality scores, compile/static scores, and regular-expression matching over hidden-test failure messages. It is nevertheless useful for identifying where engineering effort should go next.
+
+\begin{table}[ht]
+\centering
+\caption{Aggregate error buckets across all failed model/tool/fixture outcomes in the full run ($1{,}436$ total failed outcomes). Buckets are heuristic and mutually exclusive by priority order.}
+\label{tab:error-taxonomy}
+\small
+\begin{tabular}{lrr}
+\toprule
+\textbf{Error Bucket} & \textbf{Count} & \textbf{Share of Failures} \\
+\midrule
+Reported non-success & 688 & 47.9\% \\
+Syntax or parse failure & 422 & 29.4\% \\
+Module import/export failure & 220 & 15.3\% \\
+DOM/query/UI mismatch & 66 & 4.6\% \\
+Assertion-level behavior mismatch & 16 & 1.1\% \\
+Runtime reference/type error & 10 & 0.7\% \\
+Non-triviality failure & 11 & 0.8\% \\
+Other hidden-test failure & 3 & 0.2\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Error buckets by model family, aggregated across test-runner enabled and disabled conditions. Counts are failed fixture outcomes; each model has up to 246 outcomes across the two tool settings. The ``Other'' column merges non-triviality failures and other hidden-test failures.}
+\label{tab:error-taxonomy-by-model}
+\small
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\textbf{Model} & \textbf{Fail} & \textbf{Non-succ.} & \textbf{Syntax} & \textbf{Import} & \textbf{DOM/UI} & \textbf{Assert.} & \textbf{Runtime} & \textbf{Other} \\
+\midrule
+Sonnet 4.6 & 200 & 93 & 42 & 46 & 12 & 4 & 1 & 2 \\
+Opus 4.6 & 197 & 129 & 16 & 36 & 14 & 1 & 1 & 0 \\
+Opus 4.7 & 213 & 122 & 65 & 24 & 0 & 2 & 0 & 0 \\
+Gemini 2.0 Flash & 217 & 172 & 8 & 20 & 9 & 1 & 4 & 3 \\
+Gemini 2.5 Flash & 213 & 73 & 98 & 34 & 5 & 2 & 1 & 0 \\
+Gemini 2.5 Pro & 203 & 29 & 104 & 38 & 17 & 4 & 2 & 9 \\
+Gemini 3.0 Pro & 193 & 70 & 89 & 22 & 9 & 2 & 1 & 0 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\noindent The dominant failure mode is not subtle behavioral drift, but basic completion/reporting and syntactic correctness. However, the distribution is model-dependent. Opus and Gemini~2.0~Flash are reported-non-success-heavy, while Gemini~2.5~Pro and Gemini~3.0~Pro more often complete but fail through syntax/parse or module-boundary mistakes. This reinforces the benchmark's central claim: behavior-preserving refactoring requires both reliable completion and external behavioral verification.
+
+\subsection{Analysis}
+
+\paragraph{Finding 1: Tool augmentation effects are model-dependent.} The test runner tool has model-dependent effects on hidden-test pass rate. It improves Sonnet~4.6 by 9.8 percentage points, Opus~4.6 by 5.7 points, Gemini~3.0~Pro by 7.3 points, and Gemini~2.5~Flash by 2.4 points. It is nearly neutral for Opus~4.7 (+0.8 points), and directionally negative for Gemini~2.0~Flash (-2.4 points) and Gemini~2.5~Pro (-0.8 points). In paired exact McNemar tests over the shared fixture set (Table~\ref{tab:paired-tool-effect}), the enabled-vs-disabled difference is strongest for Sonnet~4.6, Opus~4.6, and Gemini~3.0~Pro; the remaining model-level deltas should be interpreted descriptively.
+
+This interaction effect---the same tool helping some models while not helping others---is a central empirical finding. It was only discoverable because \textsc{RefactorBench}-JS measures behavioral preservation directly. A compilation-based metric would not have detected the difference, as many incorrect refactorings still compile.
+
+\paragraph{Finding 2: Latency varies substantially by model and configuration.} Average wall-clock duration ranges from 4.4 minutes per fixture for Gemini~2.5~Flash without the test runner to 18.9 minutes for Gemini~2.5~Pro without the test runner. Anthropic rows range from 6.5 to 12.1 minutes per fixture; Gemini rows range from 4.4 to 18.9 minutes. For interactive applications where users wait for refactoring, this operational variation matters alongside hidden-test pass rate.
+
+\paragraph{Hypothesis: Iterative tool calling outperforms batch tool calling.} We informally observed that Gemini~2.5~Pro tends to accumulate reasoning and emit batches of tool calls, while Sonnet models call tools iteratively---one call, observe the result, decide the next action. We also observed that Sonnet models are more likely to invoke the build checker tool (\texttt{get\_all\_errors}) proactively before signaling completion, suggesting better self-verification behavior. We hypothesize that the iterative pattern is more suitable for refactoring, where each file write changes the filesystem state that subsequent decisions depend on. These observations are qualitative and unquantified; confirming them requires measuring tool-call-per-turn distributions and tool-type usage frequencies, which we plan as future work.
+
+\subsection{Retry-Adjusted Cost Analysis}
+
+Table~\ref{tab:cost} reports expected cost and time per successful refactoring under a simple retry model with up to 3 independent attempts, stopping early on success. Let $p$ denote the per-attempt hidden-test pass rate and $c$ the observed average cost per fixture. The expected number of billed attempts is:
+\[
+E[\text{attempts}] = 1 \cdot p + 2 \cdot (1{-}p) \cdot p + 3 \cdot (1{-}p)^2
+\]
+The final term covers all cases where the first two attempts fail: the third attempt is run and billed whether it succeeds or fails. The probability of eventual success within 3 attempts is $P_{\text{succ}} = 1 - (1{-}p)^3$, and the expected cost per successful refactoring is $E[\text{attempts}] \cdot c \;/\; P_{\text{succ}}$.
+
+This model assumes independent, identically distributed trial outcomes. In practice, retries use fresh conversation state but operate on the same file, so failures may be correlated with file-specific difficulty. The i.i.d.\ assumption likely understates expected cost for files that are inherently difficult to refactor.
+
+\begin{table}[ht]
+\centering
+\caption{Expected cost and time per successful refactoring, accounting for up to 3 retries. $P_{\text{succ}} = 1 - (1-p)^3$ is the probability of at least one success within 3 i.i.d.\ attempts.}
+\label{tab:cost}
+\small
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Model} & \textbf{Test Runner} & \textbf{$P_{\text{succ}}$ (\%)} & \textbf{E[\$/succ.]} & \textbf{E[min/succ.]} \\
+\midrule
+Sonnet 4.6     & Enabled  & 55.4 & 5.82 & 37.7 \\
+Sonnet 4.6     & Disabled & 36.0 & 21.03 & 47.8 \\
+Opus 4.6       & Enabled  & 53.9 & 8.44 & 53.2 \\
+Opus 4.6       & Disabled & 43.0 & 7.95 & 39.2 \\
+Opus 4.7       & Enabled  & 36.0 & 15.03 & 55.0 \\
+Opus 4.7       & Disabled & 34.2 & 13.89 & 50.0 \\
+\midrule
+Gemini 2.0 Flash & Enabled  & 28.5 & 0.05 & 52.0 \\
+Gemini 2.0 Flash & Disabled & 34.2 & 0.05 & 35.4 \\
+Gemini 2.5 Flash & Enabled  & 37.8 & 2.19 & 49.9 \\
+Gemini 2.5 Flash & Disabled & 32.3 & 1.69 & 36.1 \\
+Gemini 2.5 Pro & Enabled  & 43.0 & 9.21 & 87.3 \\
+Gemini 2.5 Pro & Disabled & 44.6 & 8.73 & 105.7 \\
+Gemini 3.0 Pro & Enabled  & 58.2 & 13.83 & 37.7 \\
+Gemini 3.0 Pro & Disabled & 44.6 & 12.14 & 77.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Retry-adjusted cost changes the ranking relative to raw pass rate. Gemini~2.0~Flash remains cheapest because its per-fixture cost is extremely low, but it also has low probability of success within three attempts. Gemini~3.0~Pro with the test runner has the highest three-attempt success probability in this run, but also the highest observed cost per fixture. These numbers should be read as an operational planning model rather than a claim about independent repeated trials on identical files.
+
+% ============================================================
+\section{Production Impact}
+\label{sec:production}
+% ============================================================
+
+\textsc{RefactorBench}-JS was developed to guide decisions for a production refactoring system. This section gives production context for the benchmark-informed decisions. The results are observational: changes were deployed incrementally without controlled A/B testing, and should be read as operational context rather than experimental claims.
+
+\subsection{Tool Evolution}
+
+The refactoring subagent's tool set evolved through four versions, each motivated by observed failure modes:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{V0 (write-only):} 35--40\% success rate. Failures included premature stopping, infinite looping (re-writing files already in context), and never modifying the original file.
+\item \textbf{V1 (+termination tool):} Addressed premature stopping by providing an explicit completion action.
+\item \textbf{V2 (+build checker):} Error diffing (showing only \emph{new} errors, not pre-existing ones) was critical; without it, the agent would chase unrelated compilation errors.
+\item \textbf{V3 (+test runner):} Enabled the agent to self-verify via its own tests. As \textsc{RefactorBench}-JS showed, this tool's effect is highly model-dependent.
+\end{itemize}
+
+\subsection{Model Selection}
+
+Guided by \textsc{RefactorBench}-JS results, we migrated from Gemini~2.5~Pro to Anthropic Sonnet models with the test runner tool enabled. Combined with the tool evolution and additional engineering work (tool-call deduplication to prevent loops, lazy file synchronization to reduce latency, prompt improvements including few-shot examples and a 6-step procedural scaffold), observed production success rates improved from ${\sim}65\%$ to above $97\%$. This was an observational production change, not a controlled A/B test; the benchmark helped identify promising directions, but the production improvement should not be read as a causal estimate for any single intervention.
+
+% ============================================================
+\section{Related Work}
+% ============================================================
+
+\paragraph{LLM refactoring.} Prior work on LLM-assisted refactoring focuses on single-turn transformations: extract method, renaming, or type migration~\citep{shirafuji2023refactoring,pomian2024together}. \textsc{RefactorBench}-JS evaluates \emph{multi-file, multi-turn, agentic} refactoring---a qualitatively different task requiring sequential decision-making.
+
+\paragraph{Agentic coding benchmarks.} SWE-bench~\citep{jimenez2024swebench} evaluates agents on GitHub issues. SWE-agent~\citep{yang2024sweagent} showed that tool design significantly affects agent performance. OpenHands~\citep{wang2024openhands} provides an open platform for development agents. Gautam et~al.'s \textsc{RefactorBench}~\citep{gautam2025refactorbench} evaluates stateful reasoning on 100 handcrafted multi-file refactoring tasks in open-source repositories; \textsc{RefactorBench}-JS is distinct in scope, focusing on JavaScript/React decomposition fixtures, hidden behavioral tests, calibration, operational metadata, and model$\times$tool interactions. Aider's refactoring benchmark~\citep{gauthier2024aider} uses a test-based methodology similar to ours, applied to Python; their polyglot benchmark~\citep{gauthier2024polyglot} extends code-editing evaluation across languages.
+
+\paragraph{Multi-turn reliability.} \citet{liu2024lost} show that LLMs struggle with information placed in the middle of long contexts, a related but not identical pressure point for long refactoring traces. \citet{chen2024benchmarking} benchmark tool-calling reliability across models, finding variation consistent with our qualitative observations.
+
+\paragraph{Tool augmentation.} Toolformer~\citep{schick2023toolformer} and \citet{qin2023tool} establish the benefits of tool use. TPTU~\citep{ruan2024tptu} identifies tool selection and invocation as distinct failure modes. Our contribution is evidence that tool benefit is model-dependent---some models degrade with additional tools.
+
+\paragraph{Refactoring correctness.} \citet{opdyke1992refactoring}, \citet{griswold1993automated}, and \citet{fowler1999refactoring} established behavioral preservation as the correctness criterion. SafeRefactor-style systems use test generation and differential execution to detect behavioral changes~\citep{soares2013automated}. \textsc{RefactorBench}-JS adapts this principle to the LLM agent setting with hidden holdout tests.
+
+% ============================================================
+\section{Discussion}
+% ============================================================
+
+\subsection{Implications for Eval Design}
+
+\textsc{RefactorBench}-JS's most transferable contribution is methodological. We advocate three principles for evaluating behavior-preserving code transformations:
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Evaluate functional properties, not structural ones.} Compilation is necessary but not sufficient. Code similarity is actively misleading for refactoring.
+\item \textbf{Use hidden tests that exercise real behavior.} Tests should be invisible to the agent and should assert observable behavior rather than implementation structure.
+\item \textbf{Measure agent calibration.} Track divergence between agent-reported success and actual behavioral preservation.
+\end{enumerate}
+
+\subsection{\texorpdfstring{The Model$\times$Tool Interaction}{The Model x Tool Interaction}}
+
+The finding that a test runner tool can help some models more than others has practical implications: model and tool choices should be evaluated jointly, not independently. We hypothesize that the interaction reflects differences in iterative reasoning ability, goal maintenance under tool abundance, and appropriate use of termination signals, but confirming these mechanisms requires future work.
+
+\subsection{Limitations and Future Work}
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Corpus scope and sourcing.} The corpus is JavaScript/React-focused and reflects realistic refactoring examples from a single production context. This provides practical complexity, but may introduce domain bias. Generalization to other languages, frameworks, and refactoring types is unknown and planned.
+\item \textbf{Public holdout contamination.} Hidden tests are hidden from the agent during an evaluation attempt, but they are public in the released repository for transparency and auditability. Future model snapshots may train on the released fixtures or tests; long-lived benchmark use should therefore rely on versioned releases, contamination checks, or private refresh splits.
+\item \textbf{No tool ablation.} We evaluate only two tool configurations (all tools $\pm$ test runner). A full ablation crossing all tool subsets with all models would be more informative.
+\item \textbf{Qualitative behavioral claims.} Tool-calling pattern differences are observed but not quantified. Future work should report tool-calls-per-turn distributions.
+\item \textbf{Test suite authorship.} Hidden test suites vary in authorship and coverage. Broader human review, external contributions, and independently authored tests would reduce potential bias.
+\end{itemize}
+
+We invite the community to evaluate their own models and agent designs against \textsc{RefactorBench}-JS and contribute additional files and test suites. The benchmark and sanitized per-fixture result data are available at \url{https://github.com/Create-Inc/refactor-bench}.
+
+% ============================================================
+\section{Conclusion}
+% ============================================================
+
+We introduced \textsc{RefactorBench}-JS, an open benchmark of 123 scored fixtures for evaluating LLM agents on behavior-preserving JavaScript/React code decomposition. The benchmark is grounded in a simple principle---behavioral preservation is a functional property best verified by functional tests---and implements this through hidden unit test suites that are never shown to the refactoring agent.
+
+Baseline evaluations reveal that tool augmentation effects, calibration, cost, latency, and failure modes vary substantially across model families. These findings, which are only visible with behavioral scoring and structured metadata, demonstrate why proper eval design is a prerequisite for meaningful agent development.
+
+\textsc{RefactorBench}-JS is publicly available in the \href{https://github.com/Create-Inc/refactor-bench}{public repository}, including sanitized per-fixture result data for the full run reported here.
+
+% ============================================================
+% References
+% ============================================================
+
+\bibliographystyle{plainnat}
+
+\begin{thebibliography}{19}
+
+\bibitem[Chen et~al.(2024)]{chen2024benchmarking}
+Z.~Chen, S.~Du, B.~Zhao, Y.~Shi, J.~Geng, Y.~Xu, J.~Fu, and S.~Li.
+\newblock Benchmarking and improving tool-calling reliability of large language models.
+\newblock \emph{arXiv preprint arXiv:2406.05015}, 2024.
+
+\bibitem[Fowler(1999)]{fowler1999refactoring}
+M.~Fowler.
+\newblock \emph{Refactoring: Improving the Design of Existing Code}.
+\newblock Addison-Wesley, 1999.
+
+\bibitem[Gauthier(2024a)]{gauthier2024aider}
+P.~Gauthier.
+\newblock Aider refactoring benchmark.
+\newblock \url{https://aider.chat/docs/leaderboards/refactor.html}, 2024. Accessed 2026-05-20.
+
+\bibitem[Gauthier(2024b)]{gauthier2024polyglot}
+P.~Gauthier.
+\newblock Aider polyglot benchmark.
+\newblock \url{https://aider.chat/2024/12/21/polyglot.html}, 2024. Accessed 2026-05-20.
+
+\bibitem[Gautam et~al.(2025)]{gautam2025refactorbench}
+D.~Gautam, S.~Garg, J.~Jang, N.~Sundaresan, and R.~Zilouchian Moghaddam.
+\newblock {RefactorBench}: Evaluating stateful reasoning in language agents through code.
+\newblock In \emph{Proceedings of the International Conference on Learning Representations (ICLR)}, 2025.
+
+\bibitem[Griswold and Notkin(1993)]{griswold1993automated}
+W.~G. Griswold and D.~Notkin.
+\newblock Automated assistance for program restructuring.
+\newblock \emph{ACM Transactions on Software Engineering and Methodology}, 2(3):228--269, 1993.
+
+\bibitem[Jimenez et~al.(2024)]{jimenez2024swebench}
+C.~E. Jimenez, J.~Yang, A.~Wettig, S.~Yao, K.~Pei, O.~Press, and K.~Narasimhan.
+\newblock {SWE-bench}: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{Proceedings of the International Conference on Learning Representations (ICLR)}, 2024.
+
+\bibitem[Liu et~al.(2024)]{liu2024lost}
+N.~F. Liu, K.~Lin, J.~Hewitt, A.~Paranjape, M.~Bevilacqua, F.~Petroni, and P.~Liang.
+\newblock Lost in the middle: How language models use long contexts.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 12:157--173, 2024.
+
+\bibitem[Opdyke(1992)]{opdyke1992refactoring}
+W.~F. Opdyke.
+\newblock \emph{Refactoring Object-Oriented Frameworks}.
+\newblock PhD thesis, University of Illinois at Urbana-Champaign, 1992.
+
+\bibitem[Pomian et~al.(2024)]{pomian2024together}
+M.~Pomian, P.~Turbak, R.~Ramasubbu, N.~Tsantalis, and D.~Dig.
+\newblock Together we go further: {LLMs} and {IDE} static analysis for extract method refactoring.
+\newblock \emph{arXiv preprint arXiv:2401.15298}, 2024.
+
+\bibitem[Qin et~al.(2023)]{qin2023tool}
+Y.~Qin, S.~Liang, Y.~Ye, K.~Zhu, L.~Yan, Y.~Lu, Y.~Lin, X.~Cong, X.~Tang, B.~Qian, S.~Zhao, R.~Tian, R.~Xie, J.~Zhou, M.~Gerstein, D.~Li, Z.~Liu, and M.~Sun.
+\newblock Tool learning with foundation models.
+\newblock \emph{arXiv preprint arXiv:2304.08354}, 2023.
+
+\bibitem[Ren et~al.(2020)]{ren2020codebleu}
+S.~Ren, D.~Guo, S.~Lu, L.~Zhou, S.~Liu, D.~Tang, N.~Sundaresan, M.~Zhou, A.~Blanco, and S.~Ma.
+\newblock Code{BLEU}: A method for automatic evaluation of code synthesis.
+\newblock \emph{arXiv preprint arXiv:2009.10297}, 2020.
+
+\bibitem[Ruan et~al.(2024)]{ruan2024tptu}
+J.~Ruan, Y.~Chen, B.~Zhang, Z.~Xu, T.~Bao, G.~Du, S.~Shi, H.~Mao, X.~Zeng, and R.~Zhao.
+\newblock {TPTU}: Large language model-based {AI} agents for task planning and tool usage.
+\newblock \emph{arXiv preprint arXiv:2308.03427}, 2024.
+
+\bibitem[Schick et~al.(2023)]{schick2023toolformer}
+T.~Schick, J.~Dwivedi-Yu, R.~Dess\`{i}, R.~Raileanu, M.~Lomeli, L.~Zettlemoyer, N.~Cancedda, and T.~Scialom.
+\newblock Toolformer: Language models can teach themselves to use tools.
+\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS)}, 2023.
+
+\bibitem[Shirafuji et~al.(2023)]{shirafuji2023refactoring}
+A.~Shirafuji, Y.~Watanobe, T.~Ito, M.~Morishita, and Y.~Nakamura.
+\newblock Refactoring programs using large language models with few-shot examples.
+\newblock In \emph{Proceedings of the International Conference on Automated Software Engineering (ASE)}, 2023.
+
+\bibitem[Soares et~al.(2013)]{soares2013automated}
+G.~Soares, R.~Gheyi, D.~Serey, and T.~Massoni.
+\newblock Automated behavioral testing of refactoring engines.
+\newblock \emph{IEEE Transactions on Software Engineering}, 39(2):147--162, 2013.
+
+\bibitem[Wang et~al.(2024)]{wang2024openhands}
+X.~Wang, B.~Li, Y.~Song, F.~F. Xu, X.~Tang, M.~Zhuge, J.~Pan, Y.~Song, B.~Li, J.~Singh, H.~H. Tran, F.~Li, R.~Ma, M.~Zhang, B.~Yu, J.~Bisk, C.~Xiong, T.~Yu, G.~Neubig, and Y.~Li.
+\newblock Open{H}ands: An open platform for {AI} software developers as generalist agents.
+\newblock \emph{arXiv preprint arXiv:2407.16741}, 2024.
+
+\bibitem[Wilson(1927)]{wilson1927probable}
+E.~B. Wilson.
+\newblock Probable inference, the law of succession, and statistical inference.
+\newblock \emph{Journal of the American Statistical Association}, 22(158):209--212, 1927. doi:10.1080/01621459.1927.10502953.
+
+\bibitem[Yang et~al.(2024)]{yang2024sweagent}
+J.~Yang, C.~E. Jimenez, A.~Wettig, K.~Lieret, S.~Yao, K.~Narasimhan, and O.~Press.
+\newblock {SWE}-agent: Agent-computer interfaces enable automated software engineering.
+\newblock \emph{arXiv preprint arXiv:2405.15793}, 2024.
+
+\bibitem[Zheng et~al.(2023)]{zheng2023judging}
+L.~Zheng, W.-L. Chiang, Y.~Sheng, S.~Zhuang, Z.~Wu, Y.~Zhuang, Z.~Lin, Z.~Li, D.~Li, E.~Xing, H.~Zhang, J.~E. Gonzalez, and I.~Stoica.
+\newblock Judging {LLM}-as-a-judge with {MT-Bench} and Chatbot Arena.
+\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS)}, 2023.
+
+\end{thebibliography}
+
+\end{document}

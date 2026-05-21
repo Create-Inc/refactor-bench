@@ -1,0 +1,5 @@
+{
+  "name": "healthcare_appointment_booking",
+  "description": "Large React Native healthcare appointment booking app refactoring (~17K tokens) with doctor directory, specialty filtering, appointment scheduling, time slot picker, patient profile, medical history, prescription tracking, notifications, and appointment reminders",
+  "appType": "mobile"
+}

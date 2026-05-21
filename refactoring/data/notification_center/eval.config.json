@@ -1,0 +1,5 @@
+{
+  "name": "notification_center",
+  "description": "Large React notification center and activity feed app (~17K tokens) with real-time notification groups, read/unread state management, priority filtering, notification preferences, snooze/dismiss actions, bulk operations, search, and activity timeline with deeply interleaved state dependencies",
+  "appType": "web"
+}

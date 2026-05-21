@@ -1,0 +1,5 @@
+{
+  "name": "team_members_settings",
+  "description": "Team member settings with roles, permissions, and invitations",
+  "appType": "web"
+}

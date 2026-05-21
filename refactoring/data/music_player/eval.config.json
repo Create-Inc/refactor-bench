@@ -1,0 +1,5 @@
+{
+  "name": "music_player",
+  "description": "Large React music streaming player refactoring (~16K tokens) with playlist management, queue system, playback controls, favorites, recently played history, search with genre filtering and sorting, artist and album detail views, lyrics panel, equalizer presets, and localStorage persistence across multiple state domains",
+  "appType": "web"
+}

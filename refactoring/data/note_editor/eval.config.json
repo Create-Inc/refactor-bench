@@ -1,0 +1,5 @@
+{
+  "name": "note_editor",
+  "description": "Rich text note editor with formatting, tags, and auto-save",
+  "appType": "web"
+}

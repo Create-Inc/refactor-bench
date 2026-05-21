@@ -1,0 +1,5 @@
+{
+  "name": "recipe_app",
+  "description": "Large React Native recipe/cooking app refactoring (~17K tokens) with recipe browsing, favorites, shopping list, meal planner, search, category filtering, timer, and recipe detail modal across multiple tabs",
+  "appType": "mobile"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "rule_generator",
+  "description": "Programmatic rule generator for SEO use cases with templates",
+  "appType": "web"
+}

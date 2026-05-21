@@ -1,0 +1,5 @@
+{
+  "name": "appointment_scheduler",
+  "description": "Large React appointment booking & scheduling app refactoring (~1400 lines) with multi-view calendar, time slot management, staff panel, revenue reporting, booking/editing modals, and complex filter state",
+  "appType": "web"
+}

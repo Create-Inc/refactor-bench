@@ -1,0 +1,5 @@
+{
+  "name": "n_queens",
+  "description": "N-Queens problem backtracking solution refactoring",
+  "appType": "web"
+}

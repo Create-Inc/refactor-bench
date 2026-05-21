@@ -1,0 +1,5 @@
+{
+  "name": "wallet_api",
+  "description": "Financial wallet API route with transactions, balance tracking, and transfers",
+  "appType": "web"
+}

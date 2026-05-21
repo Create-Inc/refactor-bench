@@ -1,0 +1,5 @@
+{
+  "name": "social_media_analytics",
+  "description": "Large React social media analytics dashboard refactoring (~18K tokens). Single-file app with analytics charts, post management, audience insights, content scheduler, and notification center with deeply interconnected state.",
+  "appType": "web"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "ai_system_prompt",
+  "description": "AI system prompt builder with context assembly and token management",
+  "appType": "web"
+}

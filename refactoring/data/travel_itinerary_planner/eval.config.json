@@ -1,0 +1,5 @@
+{
+  "name": "travel_itinerary_planner",
+  "description": "Large React travel itinerary planner refactoring (~17K tokens). Multi-day trip planning with destination management, daily activity scheduling, budget tracking, packing list, weather display, collaborative sharing, and map/timeline views.",
+  "appType": "web"
+}

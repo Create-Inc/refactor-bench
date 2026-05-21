@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/commandProcessor.js",
+  "testFile": "commandProcessor.test.js"
+}

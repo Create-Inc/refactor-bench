@@ -1,0 +1,5 @@
+{
+  "name": "app_constants",
+  "description": "Application constants with colors, pricing tiers, and configuration",
+  "appType": "web"
+}

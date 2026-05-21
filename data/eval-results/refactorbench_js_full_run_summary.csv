@@ -1,0 +1,15 @@
+model_provider,model,test_runner,fixtures,passes_tests,pass_rate,pass_rate_ci95_low,pass_rate_ci95_high,agent_reported_success,false_confidence_count,false_confidence_rate,agent_not_successful,terminal_hidden_test_failures,avg_duration_min,avg_cost_usd,total_cost_usd
+anthropic-sonnet-4.6,Sonnet 4.6,Enabled,123,29,0.2358,0.1695,0.3181,62,35,0.5645,61,59,8.8611,1.3725,168.8209
+anthropic-sonnet-4.6,Sonnet 4.6,Disabled,123,17,0.1382,0.0881,0.2102,89,72,0.809,34,34,6.5562,2.9067,357.5185
+anthropic-opus-4.6,Opus 4.6,Enabled,123,28,0.2276,0.1625,0.3093,53,26,0.4906,70,69,12.1303,1.9214,236.3303
+anthropic-opus-4.6,Opus 4.6,Disabled,123,21,0.1707,0.1145,0.2469,63,42,0.6667,60,60,6.7109,1.3572,166.936
+anthropic-opus-4.7,Opus 4.7,Enabled,123,17,0.1382,0.0881,0.2102,62,46,0.7419,61,60,7.5982,2.0783,255.627
+anthropic-opus-4.7,Opus 4.7,Disabled,123,16,0.1301,0.0817,0.2009,60,45,0.75,63,62,6.524,1.8065,222.2016
+google-2.0-flash,Gemini 2.0 Flash,Enabled,123,13,0.1057,0.0628,0.1725,28,20,0.7143,95,90,5.4908,0.0047,0.5791
+google-2.0-flash,Gemini 2.0 Flash,Disabled,123,16,0.1301,0.0817,0.2009,39,25,0.641,84,82,4.5655,0.0059,0.7232
+google-2.5-flash,Gemini 2.5 Flash,Enabled,123,18,0.1463,0.0946,0.2195,82,64,0.7805,41,41,7.279,0.3204,39.4094
+google-2.5-flash,Gemini 2.5 Flash,Disabled,123,15,0.122,0.0753,0.1915,91,76,0.8352,32,32,4.4482,0.2057,25.305
+google-2.5-pro,Gemini 2.5 Pro,Enabled,123,21,0.1707,0.1145,0.2469,108,88,0.8148,15,14,14.9298,1.5718,193.3291
+google-2.5-pro,Gemini 2.5 Pro,Disabled,123,22,0.1789,0.1212,0.256,107,86,0.8037,16,15,18.8877,1.5608,191.9756
+google-3.0-pro,Gemini 3.0 Pro,Enabled,123,31,0.252,0.1836,0.3355,98,68,0.6939,25,24,9.4782,3.4857,428.7365
+google-3.0-pro,Gemini 3.0 Pro,Disabled,123,22,0.1789,0.1212,0.256,76,55,0.7237,47,46,13.8226,2.1707,266.9965

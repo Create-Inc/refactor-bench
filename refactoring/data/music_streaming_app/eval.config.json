@@ -1,0 +1,5 @@
+{
+  "name": "music_streaming_app",
+  "description": "Large React music streaming app (~17K tokens) with library management, playlist CRUD, queue management, now-playing controls, search, shuffle/repeat, volume, and cross-cutting playback state that spans all views",
+  "appType": "web"
+}

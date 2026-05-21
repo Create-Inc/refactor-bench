@@ -1,0 +1,5 @@
+{
+  "name": "grocery_actions_hook",
+  "description": "Custom React hook for grocery list actions with optimistic updates and sync",
+  "appType": "mobile"
+}

@@ -1,0 +1,5 @@
+{
+  "name": "xrp_send_card",
+  "description": "XRP cryptocurrency transfer card with wallet integration",
+  "appType": "web"
+}

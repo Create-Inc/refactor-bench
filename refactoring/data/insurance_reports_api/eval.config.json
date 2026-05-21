@@ -1,0 +1,5 @@
+{
+  "name": "insurance_reports_api",
+  "description": "Insurance report generation API with data aggregation and PDF export",
+  "appType": "web"
+}

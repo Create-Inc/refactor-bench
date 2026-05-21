@@ -1,0 +1,5 @@
+{
+  "name": "analytics_dashboard",
+  "description": "Large React sales analytics dashboard refactoring (~17K tokens) with KPI cards, bar/line/pie charts, date range filters, data grouping, drill-down modals, data export, and multiple computed aggregation pipelines",
+  "appType": "web"
+}

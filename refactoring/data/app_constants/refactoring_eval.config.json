@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/constants.js",
+  "testFile": "constants.test.js"
+}

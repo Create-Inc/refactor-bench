@@ -1,0 +1,5 @@
+{
+  "name": "ai_command_processor",
+  "description": "AI command processor with parsing, validation, and execution routing",
+  "appType": "web"
+}

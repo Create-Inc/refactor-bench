@@ -1,0 +1,5 @@
+{
+  "name": "survey_analytics_dashboard",
+  "description": "Large React survey analytics dashboard with SVG-based bar/pie/line charts, NPS gauge, demographic breakdowns, survey comparison, response analysis, data export, settings panel, and theme toggling (~1400 lines). Tests refactoring of data visualization code with computed/derived state, SVG coordinate math, and interactive chart rendering interleaved with filtering and navigation logic.",
+  "appType": "web"
+}

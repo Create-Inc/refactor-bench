@@ -1,0 +1,5 @@
+{
+  "name": "account_codes_settings",
+  "description": "Account codes settings with CRUD operations and search",
+  "appType": "web"
+}

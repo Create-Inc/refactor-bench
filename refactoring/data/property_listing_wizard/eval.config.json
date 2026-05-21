@@ -1,0 +1,5 @@
+{
+  "name": "property_listing_wizard",
+  "description": "Large React multi-step property listing wizard refactoring (~17K tokens) with 5-step form navigation, cross-step validation, conditional field rendering, draft save/load via localStorage, photo upload simulation, pricing calculator, map/location picker, and form summary preview — exercises form-centric state management patterns fundamentally different from dashboard-style apps",
+  "appType": "web"
+}

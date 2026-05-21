@@ -1,0 +1,5 @@
+{
+  "name": "budget_expense_tracker",
+  "description": "Large React personal finance / budget expense tracker refactoring (~17K tokens) with transaction CRUD, multi-account management, category budgets with overspend detection, spending reports with date-range filtering, recurring transactions, CSV export, bulk selection/delete, account transfers, and deeply interconnected computed state (running totals, category aggregation, budget vs actual comparisons)",
+  "appType": "web"
+}

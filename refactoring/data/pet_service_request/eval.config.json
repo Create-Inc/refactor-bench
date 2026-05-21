@@ -1,0 +1,5 @@
+{
+  "name": "pet_service_request",
+  "description": "Pet grooming service request form with multi-step flow",
+  "appType": "mobile"
+}

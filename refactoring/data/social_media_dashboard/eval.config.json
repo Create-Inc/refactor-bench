@@ -1,0 +1,5 @@
+{
+  "name": "social_media_dashboard",
+  "description": "Large React social media management dashboard refactoring (~17K tokens) with multi-account management, post composer with scheduling, content feed with engagement metrics, follower analytics, hashtag tracking, notifications panel, and theme switching — tests refactoring a deeply interconnected single-file app where post scheduling, analytics aggregation, notification state, and multi-account context all share cross-cutting state",
+  "appType": "web"
+}

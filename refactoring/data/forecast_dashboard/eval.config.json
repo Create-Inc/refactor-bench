@@ -1,0 +1,5 @@
+{
+  "name": "forecast_dashboard",
+  "description": "Business forecast dashboard with charts and projections",
+  "appType": "web"
+}

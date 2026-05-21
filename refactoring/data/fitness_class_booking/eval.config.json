@@ -1,0 +1,5 @@
+{
+  "name": "fitness_class_booking",
+  "description": "Fitness class booking/scheduling app with weekly calendar, multi-filter search, booking/waitlist management, instructor profiles, and statistics dashboard (~900 lines)",
+  "appType": "web"
+}

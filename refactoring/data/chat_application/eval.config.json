@@ -1,0 +1,5 @@
+{
+  "name": "chat_application",
+  "description": "Large React real-time chat application refactoring (~17K tokens) with channels, direct messages, threaded conversations, emoji reactions, message editing/deletion, search, pinned messages, user profiles, typing indicators, channel creation, and theme toggling",
+  "appType": "web"
+}

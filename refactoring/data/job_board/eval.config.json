@@ -1,0 +1,5 @@
+{
+  "name": "job_board",
+  "description": "Large React job board / hiring platform refactoring (~17K tokens) with job listings, multi-criteria search and filtering, candidate applications, bookmarks, company profiles, application status tracking, and admin dashboard views",
+  "appType": "web"
+}

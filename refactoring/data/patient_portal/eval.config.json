@@ -1,0 +1,5 @@
+{
+  "name": "patient_portal",
+  "description": "Large React healthcare patient portal refactoring (~17K tokens) with patient records, appointment scheduling, prescription management, lab results, messaging, billing, and settings — tests refactoring of deeply interconnected entity-relationship state shared across 8 views with cross-cutting search, notifications, and localStorage persistence",
+  "appType": "web"
+}

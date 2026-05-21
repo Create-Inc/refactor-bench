@@ -1,0 +1,5 @@
+{
+  "name": "chat_messenger",
+  "description": "Large React real-time chat messenger refactoring (~17K tokens) with conversations, messages, user presence, typing indicators, reactions, pinned messages, group chats, unread counts, search, settings, and theme toggling",
+  "appType": "web"
+}

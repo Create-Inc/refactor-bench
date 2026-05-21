@@ -1,0 +1,5 @@
+{
+  "name": "project_dashboard",
+  "description": "Project management dashboard with timelines and status",
+  "appType": "web"
+}

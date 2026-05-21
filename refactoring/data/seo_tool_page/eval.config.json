@@ -1,0 +1,5 @@
+{
+  "name": "seo_tool_page",
+  "description": "Dynamic SEO tool page with slug-based routing",
+  "appType": "web"
+}

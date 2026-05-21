@@ -1,0 +1,5 @@
+{
+  "name": "game_creator_form",
+  "description": "Sports game creation form with teams, venue, and schedule selection",
+  "appType": "mobile"
+}

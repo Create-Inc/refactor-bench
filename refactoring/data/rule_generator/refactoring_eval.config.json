@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/useCases.js",
+  "testFile": "useCases.test.js"
+}

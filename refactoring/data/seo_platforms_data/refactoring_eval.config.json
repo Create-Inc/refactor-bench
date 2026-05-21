@@ -1,0 +1,4 @@
+{
+  "targetFile": "app/platforms.js",
+  "testFile": "platforms.test.js"
+}

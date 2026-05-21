@@ -1,0 +1,5 @@
+{
+  "name": "event_planner",
+  "description": "Large React Native event planning & social gatherings app refactoring (~17K tokens) with event browsing, RSVP management, calendar view, category filtering, search, map/location display, attendee lists, event creation modal, notifications, and user profiles. First mobile (appType: mobile) refactoring fixture — tests that the agent can correctly decompose a complex React Native screen with ScrollView, FlatList, modal workflows, and deeply interconnected state into smaller, well-structured modules while preserving all functionality.",
+  "appType": "mobile"
+}
