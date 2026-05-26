@@ -1,0 +1,124 @@
+rank,fixture,conditions,passes,failures,pass_rate,failure_rate,avg_duration_min,avg_cost_usd,top_failure_bucket,top_failure_bucket_count,failure_bucket_counts
+1,expense_tracker,14,0,14,0.0000,1.0000,43.77,0.0000,Reported non-success,14,Reported non-success:14
+2,grocery_mobile_app,14,0,14,0.0000,1.0000,28.74,0.0000,Reported non-success,14,Reported non-success:14
+3,sports_schedule,14,0,14,0.0000,1.0000,24.23,1.1756,Reported non-success,12,Reported non-success:12; DOM/query/UI mismatch:1; Non-triviality failure:1
+4,wave_chat,14,0,14,0.0000,1.0000,22.99,0.1208,Reported non-success,13,Reported non-success:13; Module import/export failure:1
+5,learning_journey,14,0,14,0.0000,1.0000,21.78,1.5476,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
+6,mobile_game,14,0,14,0.0000,1.0000,18.50,1.8082,Reported non-success,10,Reported non-success:10; Module import/export failure:3; Non-triviality failure:1
+7,seo_platforms_data,14,0,14,0.0000,1.0000,16.54,1.1974,Assertion-level behavior mismatch,11,Assertion-level behavior mismatch:11; Reported non-success:3
+8,financial_search,14,0,14,0.0000,1.0000,16.00,0.6815,Reported non-success,11,Reported non-success:11; DOM/query/UI mismatch:2; Runtime reference/type error:1
+9,block_blast_game,14,0,14,0.0000,1.0000,15.80,0.8820,Reported non-success,9,Reported non-success:9; DOM/query/UI mismatch:4; Module import/export failure:1
+10,financial_portfolio,14,0,14,0.0000,1.0000,15.57,2.9002,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+11,event_planner,14,0,14,0.0000,1.0000,15.38,2.4266,Module import/export failure,9,Module import/export failure:9; Reported non-success:5
+12,sports_admin_panel,14,0,14,0.0000,1.0000,14.65,1.2408,Reported non-success,8,Reported non-success:8; Module import/export failure:6
+13,travel_itinerary_planner,14,0,14,0.0000,1.0000,13.98,1.2418,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
+14,seo_tool_page,14,0,14,0.0000,1.0000,13.27,1.9882,Reported non-success,8,Reported non-success:8; DOM/query/UI mismatch:5; Assertion-level behavior mismatch:1
+15,financial_analytics_dashboard,14,0,14,0.0000,1.0000,13.20,3.1464,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+16,pet_service_request,14,0,14,0.0000,1.0000,13.10,1.6684,Reported non-success,9,Reported non-success:9; Module import/export failure:5
+17,enhanced_chat_screen,14,0,14,0.0000,1.0000,13.04,0.8990,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
+18,property_listing_wizard,14,0,14,0.0000,1.0000,13.03,1.9658,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+19,ecommerce_storefront,14,0,14,0.0000,1.0000,12.41,1.1447,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
+20,chat_application,14,0,14,0.0000,1.0000,12.23,1.9729,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+21,real_estate_listings,14,0,14,0.0000,1.0000,11.47,3.5801,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+22,inventory_admin,14,0,14,0.0000,1.0000,11.17,1.9709,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+23,health_clinic_booking,14,0,14,0.0000,1.0000,11.14,1.8376,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+24,social_media_feed,14,0,14,0.0000,1.0000,10.76,2.3824,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+25,large_landing_page,14,0,14,0.0000,1.0000,10.74,0.8974,Module import/export failure,11,Module import/export failure:11; Reported non-success:3
+26,survey_analytics_dashboard,14,0,14,0.0000,1.0000,10.63,1.3646,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+27,video_streaming_platform,14,0,14,0.0000,1.0000,10.56,2.2756,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+28,music_streaming_player,14,0,14,0.0000,1.0000,10.38,2.8335,Syntax or parse failure,13,Syntax or parse failure:13; Reported non-success:1
+29,fitness_class_booking,14,0,14,0.0000,1.0000,10.30,2.6073,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+30,property_management,14,0,14,0.0000,1.0000,10.15,1.4858,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+31,analytics_dashboard,14,0,14,0.0000,1.0000,10.14,1.9316,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+32,hurode_raya_landing,14,0,14,0.0000,1.0000,10.03,1.9275,Module import/export failure,9,Module import/export failure:9; Reported non-success:5
+33,content_scheduler,14,0,14,0.0000,1.0000,10.01,1.7204,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+34,appointment_scheduler,14,0,14,0.0000,1.0000,9.94,1.5063,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+35,music_streaming_app,14,0,14,0.0000,1.0000,9.89,2.4327,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+36,event_detail,14,0,14,0.0000,1.0000,9.84,1.1052,Reported non-success,5,Reported non-success:5; DOM/query/UI mismatch:4; Module import/export failure:3; Non-triviality failure:1; Runtime reference/type error:1
+37,online_store,14,0,14,0.0000,1.0000,9.75,2.8867,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+38,family_plan,14,0,14,0.0000,1.0000,9.75,0.0939,Reported non-success,13,Reported non-success:13; DOM/query/UI mismatch:1
+39,realtime_chat_app,14,0,14,0.0000,1.0000,9.73,1.4086,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+40,activity_tracker,14,0,14,0.0000,1.0000,9.60,0.6590,Reported non-success,8,Reported non-success:8; Module import/export failure:6
+41,chat_messenger,14,0,14,0.0000,1.0000,9.60,1.7714,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+42,healthcare_appointment_booking,14,0,14,0.0000,1.0000,9.59,2.3449,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+43,recipe_manager,14,0,14,0.0000,1.0000,9.57,1.9941,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+44,social_media_dashboard,14,0,14,0.0000,1.0000,9.30,2.4688,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+45,event_conference_manager,14,0,14,0.0000,1.0000,9.27,4.3273,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+46,wallet_profile,14,0,14,0.0000,1.0000,9.18,0.5130,Reported non-success,12,Reported non-success:12; Module import/export failure:1; Non-triviality failure:1
+47,fitness_tracker,14,0,14,0.0000,1.0000,9.08,1.2675,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+48,social_media_analytics,14,0,14,0.0000,1.0000,9.00,2.8684,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+49,game_creator_form,14,0,14,0.0000,1.0000,9.00,3.3622,DOM/query/UI mismatch,6,DOM/query/UI mismatch:6; Reported non-success:4; Module import/export failure:3; Other hidden-test failure:1
+50,referral_system,14,0,14,0.0000,1.0000,8.98,0.3201,Reported non-success,12,Reported non-success:12; Module import/export failure:2
+51,event_registration,14,0,14,0.0000,1.0000,8.91,0.8634,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
+52,patient_management,14,0,14,0.0000,1.0000,8.85,2.5707,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+53,recipe_meal_planner,14,0,14,0.0000,1.0000,8.83,2.0635,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+54,real_estate_marketplace,14,0,14,0.0000,1.0000,8.81,1.8689,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+55,music_player,14,0,14,0.0000,1.0000,8.71,2.0786,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+56,survey_quiz_builder,14,0,14,0.0000,1.0000,8.57,1.5867,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+57,recipe_sharing_app,14,0,14,0.0000,1.0000,8.56,2.1759,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+58,collaborative_doc_editor,14,0,14,0.0000,1.0000,8.38,1.6761,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+59,grocery_actions_hook,14,0,14,0.0000,1.0000,8.30,2.1433,Reported non-success,8,Reported non-success:8; Module import/export failure:6
+60,meal_planner_mobile,14,0,14,0.0000,1.0000,8.20,1.4325,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+61,ai_command_processor,14,0,14,0.0000,1.0000,8.03,0.5183,Reported non-success,10,Reported non-success:10; Module import/export failure:2; Runtime reference/type error:2
+62,collaborative_whiteboard,14,0,14,0.0000,1.0000,7.90,1.6370,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+63,favorite_stores,14,0,14,0.0000,1.0000,7.76,0.5271,Reported non-success,12,Reported non-success:12; Module import/export failure:2
+64,social_media_app,14,0,14,0.0000,1.0000,7.67,2.1112,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+65,budget_expense_tracker,14,0,14,0.0000,1.0000,7.56,1.7127,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+66,community_forum,14,0,14,0.0000,1.0000,7.45,1.5071,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+67,patient_portal,14,0,14,0.0000,1.0000,7.30,3.4250,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+68,recipe_app,14,0,14,0.0000,1.0000,7.19,2.6187,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+69,beauty_shop_mobile,14,0,14,0.0000,1.0000,6.97,0.6598,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+70,job_board_platform,14,0,14,0.0000,1.0000,6.94,1.9945,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+71,course_platform,14,0,14,0.0000,1.0000,6.57,1.8903,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+72,job_board,14,0,14,0.0000,1.0000,6.13,3.5916,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+73,online_marketplace,14,0,14,0.0000,1.0000,5.97,2.6226,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+74,quest_system,14,0,14,0.0000,1.0000,5.85,0.8679,Reported non-success,9,Reported non-success:9; DOM/query/UI mismatch:5
+75,taskflow,14,0,14,0.0000,1.0000,5.76,0.9264,Module import/export failure,12,Module import/export failure:12; Reported non-success:2
+76,mobile_onboarding,14,0,14,0.0000,1.0000,5.65,1.5574,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
+77,budget_tracker,14,0,14,0.0000,1.0000,5.43,2.2883,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+78,property_listing_marketplace,14,0,14,0.0000,1.0000,5.39,2.9526,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+79,job_board_tracker,14,0,14,0.0000,1.0000,5.32,2.6502,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+80,notification_center,14,0,14,0.0000,1.0000,5.14,2.2197,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+81,seasonal_events,14,0,14,0.0000,1.0000,4.46,0.8843,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:6; Syntax or parse failure:1
+82,contact_section,14,0,14,0.0000,1.0000,3.38,0.6094,DOM/query/UI mismatch,8,DOM/query/UI mismatch:8; Reported non-success:6
+83,forecast_dashboard,14,0,14,0.0000,1.0000,3.11,0.7611,Module import/export failure,13,Module import/export failure:13; Reported non-success:1
+84,team_dashboard,14,0,14,0.0000,1.0000,3.06,0.7424,Module import/export failure,11,Module import/export failure:11; Reported non-success:3
+85,note_editor,14,0,14,0.0000,1.0000,3.01,1.0145,Module import/export failure,11,Module import/export failure:11; Reported non-success:2; DOM/query/UI mismatch:1
+86,basic_web_with_auth,14,0,14,0.0000,1.0000,2.13,0.8346,Module import/export failure,13,Module import/export failure:13; Reported non-success:1
+87,wallet_api,14,1,13,0.0714,0.9286,20.01,0.7137,Reported non-success,10,Reported non-success:10; Module import/export failure:3
+88,insurance_reports_api,14,1,13,0.0714,0.9286,10.02,1.1298,Module import/export failure,7,Module import/export failure:7; Reported non-success:3; DOM/query/UI mismatch:2; Non-triviality failure:1
+89,group_management,14,1,13,0.0714,0.9286,9.45,2.0407,Module import/export failure,13,Module import/export failure:13
+90,project_dashboard,14,1,13,0.0714,0.9286,3.12,0.8838,Module import/export failure,11,Module import/export failure:11; Reported non-success:2
+91,ai_code_mode,14,2,12,0.1429,0.8571,23.77,1.3124,Reported non-success,7,Reported non-success:7; Module import/export failure:2; Non-triviality failure:2; DOM/query/UI mismatch:1
+92,grocery_list,14,2,12,0.1429,0.8571,8.44,0.7735,Reported non-success,11,Reported non-success:11; DOM/query/UI mismatch:1
+93,resource_grid_row,14,2,12,0.1429,0.8571,3.98,1.1154,Module import/export failure,10,Module import/export failure:10; Reported non-success:2
+94,admin_panel,14,3,11,0.2143,0.7857,21.12,1.0126,Reported non-success,7,Reported non-success:7; Module import/export failure:2; DOM/query/UI mismatch:1; Non-triviality failure:1
+95,cv_builder,14,3,11,0.2143,0.7857,8.96,1.1888,Reported non-success,10,Reported non-success:10; Non-triviality failure:1
+96,onboarding_flow,14,3,11,0.2143,0.7857,6.26,1.0134,Reported non-success,5,Reported non-success:5; Module import/export failure:4; Non-triviality failure:2
+97,template_modal,14,3,11,0.2143,0.7857,2.53,1.4309,DOM/query/UI mismatch,5,DOM/query/UI mismatch:5; Assertion-level behavior mismatch:2; Reported non-success:2; Module import/export failure:1; Other hidden-test failure:1
+98,payments_hub,14,4,10,0.2857,0.7143,11.14,1.5145,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:1; Module import/export failure:1; Runtime reference/type error:1
+99,tournament_manager,14,4,10,0.2857,0.7143,8.36,1.6363,Reported non-success,8,Reported non-success:8; Module import/export failure:1; Runtime reference/type error:1
+100,resume_viewer,14,4,10,0.2857,0.7143,6.35,1.9642,Reported non-success,5,Reported non-success:5; Module import/export failure:4; Syntax or parse failure:1
+101,football_page,14,4,10,0.2857,0.7143,4.91,0.7894,Reported non-success,7,Reported non-success:7; Module import/export failure:3
+102,game_results_handler,14,4,10,0.2857,0.7143,4.46,0.9462,Module import/export failure,5,Module import/export failure:5; Reported non-success:5
+103,mobile_scoreboard,14,5,9,0.3571,0.6429,6.01,1.3771,Reported non-success,8,Reported non-success:8; Module import/export failure:1
+104,xrp_send_card,14,5,9,0.3571,0.6429,5.46,1.2301,Reported non-success,6,Reported non-success:6; DOM/query/UI mismatch:2; Module import/export failure:1
+105,meal_tracker_form,14,5,9,0.3571,0.6429,4.01,0.5364,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:2
+106,team_members_settings,14,6,8,0.4286,0.5714,5.13,1.0867,DOM/query/UI mismatch,4,DOM/query/UI mismatch:4; Reported non-success:4
+107,flight_booking_modal,14,7,7,0.5000,0.5000,5.68,1.3962,Reported non-success,4,Reported non-success:4; DOM/query/UI mismatch:2; Assertion-level behavior mismatch:1
+108,health_goals_modal,14,12,2,0.8571,0.1429,1.79,0.8029,DOM/query/UI mismatch,2,DOM/query/UI mismatch:2
+109,seo_content_data,14,13,1,0.9286,0.0714,2.95,0.6955,Runtime reference/type error,1,Runtime reference/type error:1
+110,ai_system_prompt,14,13,1,0.9286,0.0714,2.15,1.1384,Assertion-level behavior mismatch,1,Assertion-level behavior mismatch:1
+111,account_codes_settings,14,13,1,0.9286,0.0714,1.96,0.4769,Runtime reference/type error,1,Runtime reference/type error:1
+112,loan_borrow_modal,14,13,1,0.9286,0.0714,1.70,0.9750,Other hidden-test failure,1,Other hidden-test failure:1
+113,rule_generator,14,13,1,0.9286,0.0714,0.98,0.4928,Runtime reference/type error,1,Runtime reference/type error:1
+114,n_queens,14,13,1,0.9286,0.0714,0.85,0.3382,Runtime reference/type error,1,Runtime reference/type error:1
+115,seo_keywords_data,14,14,0,1.0000,0.0000,24.65,0.7424,,,
+116,departments_settings,14,14,0,1.0000,0.0000,2.11,0.8674,,,
+117,app_constants,14,14,0,1.0000,0.0000,1.26,0.6581,,,
+118,binary_search,14,14,0,1.0000,0.0000,1.15,0.3637,,,
+119,fibonacci_dp,14,14,0,1.0000,0.0000,0.86,0.5402,,,
+120,bfs_tree_traversal,14,14,0,1.0000,0.0000,0.81,0.3407,,,
+121,dfs_graph,14,14,0,1.0000,0.0000,0.74,0.4520,,,
+122,merge_sort,14,14,0,1.0000,0.0000,0.57,0.3790,,,
+123,dijkstra_shortest_path,14,14,0,1.0000,0.0000,0.55,0.3715,,,

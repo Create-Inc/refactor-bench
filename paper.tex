@@ -438,6 +438,34 @@ Gemini 3.0 Pro & 193 & 70 & 89 & 22 & 9 & 2 & 1 & 0 \\
 
 \noindent The dominant failure mode is not subtle behavioral drift, but basic completion/reporting and syntactic correctness. However, the distribution is model-dependent. Opus and Gemini~2.0~Flash are reported-non-success-heavy, while Gemini~2.5~Pro and Gemini~3.0~Pro more often complete but fail through syntax/parse or module-boundary mistakes. This reinforces the benchmark's central claim: behavior-preserving refactoring requires both reliable completion and external behavioral verification.
 
+\begin{table}[ht]
+\centering
+\caption{Hardest fixtures by hidden-test failures across all 14 model/tool conditions. Rows are ranked by failure count, with average duration as a tie-breaker. Because 86 fixtures failed in all 14 conditions, this table should be read as representative of the hardest tier; the full ranking is released in \texttt{data/eval-results/refactorbench\_js\_fixture\_hardness.csv}.}
+\label{tab:hardest-fixtures}
+\small
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrl}
+\toprule
+\textbf{Fixture} & \textbf{Passes} & \textbf{Failures} & \textbf{Avg. Min.} & \textbf{Dominant Failure Bucket} \\
+\midrule
+\texttt{expense\_tracker} & 0/14 & 14/14 & 43.8 & Reported non-success \\
+\texttt{grocery\_mobile\_app} & 0/14 & 14/14 & 28.7 & Reported non-success \\
+\texttt{sports\_schedule} & 0/14 & 14/14 & 24.2 & Reported non-success \\
+\texttt{wave\_chat} & 0/14 & 14/14 & 23.0 & Reported non-success \\
+\texttt{learning\_journey} & 0/14 & 14/14 & 21.8 & Module import/export failure \\
+\texttt{mobile\_game} & 0/14 & 14/14 & 18.5 & Reported non-success \\
+\texttt{seo\_platforms\_data} & 0/14 & 14/14 & 16.5 & Assertion-level behavior mismatch \\
+\texttt{financial\_search} & 0/14 & 14/14 & 16.0 & Reported non-success \\
+\texttt{block\_blast\_game} & 0/14 & 14/14 & 15.8 & Reported non-success \\
+\texttt{financial\_portfolio} & 0/14 & 14/14 & 15.6 & Syntax or parse failure \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\noindent Fixture-level hardness is highly skewed. Across the 123 fixtures, 86 passed in zero of the 14 conditions, while 9 passed in all 14. This suggests that the benchmark contains both a broad hard tier and a smaller easy tier; future versions should preserve this per-fixture metadata so evaluators can distinguish overall progress from overfitting to easier files.
+
 \subsection{Analysis}
 
 \paragraph{Finding 1: Tool augmentation effects are model-dependent.} The test runner tool has model-dependent effects on hidden-test pass rate. It improves Sonnet~4.6 by 9.8 percentage points, Opus~4.6 by 5.7 points, Gemini~3.0~Pro by 7.3 points, and Gemini~2.5~Flash by 2.4 points. It is nearly neutral for Opus~4.7 (+0.8 points), and directionally negative for Gemini~2.0~Flash (-2.4 points) and Gemini~2.5~Pro (-0.8 points). In paired exact McNemar tests over the shared fixture set (Table~\ref{tab:paired-tool-effect}), the enabled-vs-disabled difference is strongest for Sonnet~4.6, Opus~4.6, and Gemini~3.0~Pro; the remaining model-level deltas should be interpreted descriptively.
