@@ -66,7 +66,7 @@ Valid `failure_bucket` values are: `Passed`, `Reported non-success`, `Non-trivia
 
 ## Fixture Hardness Schema
 
-`refactorbench_js_fixture_hardness.csv` aggregates the per-fixture results across all model and test-runner conditions. `passes` and `failures` count hidden-test outcomes across the 14 evaluated conditions; `pass_rate` and `failure_rate` are the corresponding fractions. `top_failure_bucket` is the most common heuristic failure bucket among failed outcomes for that fixture, with `failure_bucket_counts` preserving the full bucket breakdown.
+`refactorbench_js_fixture_hardness.csv` aggregates the per-fixture results across all model and test-runner conditions. `fixture_category`, `target_file`, and `target_loc` describe the benchmark target file; categories are heuristic labels inferred from fixture path and file contents. `passes` and `failures` count hidden-test outcomes across the 14 evaluated conditions; `pass_rate` and `failure_rate` are the corresponding fractions. `top_failure_bucket` is the most common heuristic failure bucket among failed outcomes for that fixture, with `failure_bucket_counts` preserving the full bucket breakdown.
 
 ## Regeneration
 

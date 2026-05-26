@@ -445,26 +445,47 @@ Gemini 3.0 Pro & 193 & 70 & 89 & 22 & 9 & 2 & 1 & 0 \\
 \small
 \setlength{\tabcolsep}{4pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrl}
+\begin{tabular}{llrrrl}
 \toprule
-\textbf{Fixture} & \textbf{Passes} & \textbf{Failures} & \textbf{Avg. Min.} & \textbf{Dominant Failure Bucket} \\
+\textbf{Fixture} & \textbf{Category} & \textbf{LOC} & \textbf{Passes} & \textbf{Avg. Min.} & \textbf{Dominant Failure Bucket} \\
 \midrule
-\texttt{expense\_tracker} & 0/14 & 14/14 & 43.8 & Reported non-success \\
-\texttt{grocery\_mobile\_app} & 0/14 & 14/14 & 28.7 & Reported non-success \\
-\texttt{sports\_schedule} & 0/14 & 14/14 & 24.2 & Reported non-success \\
-\texttt{wave\_chat} & 0/14 & 14/14 & 23.0 & Reported non-success \\
-\texttt{learning\_journey} & 0/14 & 14/14 & 21.8 & Module import/export failure \\
-\texttt{mobile\_game} & 0/14 & 14/14 & 18.5 & Reported non-success \\
-\texttt{seo\_platforms\_data} & 0/14 & 14/14 & 16.5 & Assertion-level behavior mismatch \\
-\texttt{financial\_search} & 0/14 & 14/14 & 16.0 & Reported non-success \\
-\texttt{block\_blast\_game} & 0/14 & 14/14 & 15.8 & Reported non-success \\
-\texttt{financial\_portfolio} & 0/14 & 14/14 & 15.6 & Syntax or parse failure \\
+\texttt{expense\_tracker} & Web UI & 3{,}769 & 0/14 & 43.8 & Reported non-success \\
+\texttt{grocery\_mobile\_app} & Mobile & 1{,}648 & 0/14 & 28.7 & Reported non-success \\
+\texttt{sports\_schedule} & Mobile & 1{,}287 & 0/14 & 24.2 & Reported non-success \\
+\texttt{wave\_chat} & Web UI & 1{,}953 & 0/14 & 23.0 & Reported non-success \\
+\texttt{learning\_journey} & Mobile & 1{,}007 & 0/14 & 21.8 & Module import/export failure \\
+\texttt{mobile\_game} & Mobile & 289 & 0/14 & 18.5 & Reported non-success \\
+\texttt{seo\_platforms\_data} & Utility/API & 962 & 0/14 & 16.5 & Assertion-level behavior mismatch \\
+\texttt{financial\_search} & Mobile & 925 & 0/14 & 16.0 & Reported non-success \\
+\texttt{block\_blast\_game} & Mobile & 509 & 0/14 & 15.8 & Reported non-success \\
+\texttt{financial\_portfolio} & Web UI & 998 & 0/14 & 15.6 & Syntax or parse failure \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
-\noindent Fixture-level hardness is highly skewed. Across the 123 fixtures, 86 passed in zero of the 14 conditions, while 9 passed in all 14. This suggests that the benchmark contains both a broad hard tier and a smaller easy tier; future versions should preserve this per-fixture metadata so evaluators can distinguish overall progress from overfitting to easier files.
+\noindent Fixture-level hardness is highly skewed. Across the 123 fixtures, 86 passed in zero of the 14 conditions, while 9 passed in all 14. The zero-pass tier is not random: it is concentrated in large UI fixtures. Zero-pass targets average 1{,}294 physical lines (median 1{,}147), compared with 372 average lines (median 267) for fixtures that passed in at least one condition. No algorithm/data fixture was in the zero-pass tier; every pure algorithm/data target passed in at least one model/tool condition.
+
+\begin{table}[ht]
+\centering
+\caption{Composition of the zero-pass fixture tier. Failure counts are aggregated across all failed outcomes in the tier; each zero-pass fixture contributes 14 failed outcomes. Categories are heuristic labels inferred from target paths and file contents.}
+\label{tab:zero-pass-tier}
+\small
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrl}
+\toprule
+\textbf{Category} & \textbf{Fixtures} & \textbf{Share} & \textbf{Median LOC} & \textbf{Largest Failure Buckets} \\
+\midrule
+React web UI & 57 & 66.3\% & 1{,}204 & Syntax/parse (366); reported non-success (333); import/export (78) \\
+Mobile / React Native & 26 & 30.2\% & 751 & Reported non-success (221); import/export (58); syntax/parse (55) \\
+Utility/API & 3 & 3.5\% & 402 & Import/export (15); reported non-success (14); assertion mismatch (11) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\noindent These failures suggest a qualitative boundary in current refactoring agents. On smaller pure-code fixtures, at least one model/tool setting usually finds a behavior-preserving decomposition. On large UI and mobile fixtures, failures are systemic: 47.2\% of zero-pass outcomes are reported non-success, while most of the remaining failures occur after the agent reports success but leaves syntax, parse, import/export, or UI behavior errors. This is evidence that the benchmark's hardest tier stresses multi-file boundary management and UI/runtime preservation, not just isolated algorithmic reasoning.
 
 \subsection{Analysis}
 

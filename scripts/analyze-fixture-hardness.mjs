@@ -45,6 +45,42 @@ function toNumber(value) {
   return Number.isFinite(number) ? number : null;
 }
 
+function loadFixtureMetadata(fixture) {
+  const configPath = `refactoring/data/${fixture}/refactoring_eval.config.json`;
+  const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+  const targetFile = config.targetFile;
+  const targetPath = `refactoring/data/${fixture}/src/${targetFile}`;
+  const content = fs.existsSync(targetPath)
+    ? fs.readFileSync(targetPath, "utf8")
+    : "";
+  const targetLoc = content === "" ? 0 : content.split("\n").length;
+  const classificationText = `${fixture} ${targetFile} ${content.slice(0, 4000)}`;
+  const lower = classificationText.toLowerCase();
+
+  let fixtureCategory = "Utility/API";
+  if (
+    /react-native|expo-router|@react-navigation|src\/screens|\(tabs\)|\.native\.|from ['"]expo/.test(
+      lower
+    )
+  ) {
+    fixtureCategory = "Mobile / React Native";
+  } else if (
+    /\.(jsx|tsx)$/.test(targetFile) ||
+    /from ['"]react|usestate|useeffect|@testing-library\/react/.test(lower)
+  ) {
+    fixtureCategory = "React web UI";
+  } else if (
+    /api\/|route\.js|auth|command|processor|hook|use[A-Z]/.test(targetFile) ||
+    /fetch\(|request|response|database|supabase|localstorage/.test(lower)
+  ) {
+    fixtureCategory = "Utility/API";
+  } else {
+    fixtureCategory = "Algorithm/data";
+  }
+
+  return { targetFile, targetLoc, fixtureCategory };
+}
+
 const text = fs.readFileSync(inputPath, "utf8").trim();
 const [headerLine, ...lines] = text.split(/\r?\n/);
 const headers = parseCsvLine(headerLine);
@@ -108,6 +144,9 @@ const ranked = [...byFixture.values()].sort(
 const outputHeaders = [
   "rank",
   "fixture",
+  "fixture_category",
+  "target_file",
+  "target_loc",
   "conditions",
   "passes",
   "failures",
@@ -121,6 +160,7 @@ const outputHeaders = [
 ];
 
 const outputRows = ranked.map((summary, index) => {
+  const metadata = loadFixtureMetadata(summary.fixture);
   const bucketEntries = [...summary.failureBuckets.entries()].sort(
     (left, right) => right[1] - left[1] || left[0].localeCompare(right[0])
   );
@@ -132,6 +172,9 @@ const outputRows = ranked.map((summary, index) => {
   return {
     rank: index + 1,
     fixture: summary.fixture,
+    fixture_category: metadata.fixtureCategory,
+    target_file: metadata.targetFile,
+    target_loc: metadata.targetLoc,
     conditions: summary.conditions,
     passes: summary.passes,
     failures: summary.failures,
