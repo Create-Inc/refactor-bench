@@ -487,6 +487,32 @@ Utility/API & 3 & 3.5\% & 402 & Import/export (15); reported non-success (14); a
 
 \noindent These failures suggest a qualitative boundary in current refactoring agents. On smaller pure-code fixtures, at least one model/tool setting usually finds a behavior-preserving decomposition. On large UI and mobile fixtures, failures are systemic: 47.2\% of zero-pass outcomes are reported non-success, while most of the remaining failures occur after the agent reports success but leaves syntax, parse, import/export, or UI behavior errors. This is evidence that the benchmark's hardest tier stresses multi-file boundary management and UI/runtime preservation, not just isolated algorithmic reasoning.
 
+\begin{table}[ht]
+\centering
+\caption{Behavioral contract families exercised by the released tests for the 86 zero-pass fixtures. Labels are heuristic and derived from public test source text; a fixture can exercise multiple contract families.}
+\label{tab:zero-pass-contracts}
+\small
+\begin{tabular}{lr}
+\toprule
+\textbf{Contract Family} & \textbf{Zero-Pass Fixtures} \\
+\midrule
+Computed domain state & 84/86 \\
+Initial render and visible copy & 82/86 \\
+Search, filtering, and sorting & 80/86 \\
+Module exports and data shape & 79/86 \\
+Forms, modals, and CRUD flows & 77/86 \\
+Navigation and view switching & 77/86 \\
+API, auth, and external side effects & 76/86 \\
+Accessibility and semantic selectors & 62/86 \\
+Browser or device persistence & 53/86 \\
+Async behavior and timers & 48/86 \\
+Mobile/native runtime behavior & 25/86 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent The public test contracts clarify what agents are breaking in the zero-pass tier. For example, the hardest \texttt{expense\_tracker} fixture has 111 tests and 174 assertions covering sidebar navigation, transaction modals, filtering, sorting, localStorage persistence, export behavior, and computed financial summaries. \texttt{financial\_portfolio} checks portfolio totals, sector and asset allocation, watchlists, alerts, filtering, sorting, and transaction forms. Mobile fixtures such as \texttt{grocery\_mobile\_app} and \texttt{sports\_schedule} add authentication state, router behavior, mocked API calls, accessibility labels, and async loading states. Thus the zero-pass tier fails because agents do not preserve a dense graph of coupled UI, state, module, and side-effect contracts after decomposition.
+
 \subsection{Analysis}
 
 \paragraph{Finding 1: Tool augmentation effects are model-dependent.} The test runner tool has model-dependent effects on hidden-test pass rate. It improves Sonnet~4.6 by 9.8 percentage points, Opus~4.6 by 5.7 points, Gemini~3.0~Pro by 7.3 points, and Gemini~2.5~Flash by 2.4 points. It is nearly neutral for Opus~4.7 (+0.8 points), and directionally negative for Gemini~2.0~Flash (-2.4 points) and Gemini~2.5~Pro (-0.8 points). In paired exact McNemar tests over the shared fixture set (Table~\ref{tab:paired-tool-effect}), the enabled-vs-disabled difference is strongest for Sonnet~4.6, Opus~4.6, and Gemini~3.0~Pro; the remaining model-level deltas should be interpreted descriptively.

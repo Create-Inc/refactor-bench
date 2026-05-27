@@ -9,6 +9,7 @@ This directory contains the sanitized fine-grained data used for the paper table
 - `refactorbench_js_full_run_summary.csv`: aggregate rows used for the main score, calibration, and operational metadata tables.
 - `refactorbench_js_tool_effects_paired.csv`: paired test-runner enabled vs. disabled comparison by model.
 - `refactorbench_js_fixture_hardness.csv`: fixtures ranked by failure frequency across all model/tool conditions.
+- `refactorbench_js_zero_pass_test_contracts.csv`: public-test contract summary for fixtures that failed in every model/tool condition.
 - `refactorbench_js_full_run_manifest.json`: source export manifest and reproducibility notes.
 
 ## Privacy Boundary
@@ -68,6 +69,8 @@ Valid `failure_bucket` values are: `Passed`, `Reported non-success`, `Non-trivia
 
 `refactorbench_js_fixture_hardness.csv` aggregates the per-fixture results across all model and test-runner conditions. `fixture_category`, `target_file`, and `target_loc` describe the benchmark target file; categories are heuristic labels inferred from fixture path and file contents. `passes` and `failures` count hidden-test outcomes across the 14 evaluated conditions; `pass_rate` and `failure_rate` are the corresponding fractions. `top_failure_bucket` is the most common heuristic failure bucket among failed outcomes for that fixture, with `failure_bucket_counts` preserving the full bucket breakdown.
 
+`refactorbench_js_zero_pass_test_contracts.csv` summarizes what the released holdout tests check for the zero-pass fixture tier. It records the test file, test/assertion/interaction counts, matched behavioral contract families, and representative test names. Contract labels are heuristic and derived from public test source text.
+
 ## Regeneration
 
 The committed sanitized files are the canonical public result artifact. The raw exports are private because they contain agent prompts, generated code snapshots, scorer message bodies, and other harness internals.
@@ -78,6 +81,7 @@ Internal users with access to the raw exports can regenerate the sanitized artif
 node scripts/sanitize-eval-results.mjs <raw-eval-export-dir> data/eval-results
 node scripts/analyze-paired-tool-effects.mjs
 node scripts/analyze-fixture-hardness.mjs
+node scripts/analyze-zero-pass-test-contracts.mjs
 ```
 
 The dedupe rule is: for each `(model_provider, test_runner, fixture)`, keep the row with the latest `result_created_at`.
