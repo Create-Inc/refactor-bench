@@ -1,12 +1,12 @@
 # RefactorBench-JS
 
-An open benchmark suite for measuring the ability of LLM agents to perform behavior-preserving JavaScript and React code decomposition.
+An open benchmark for evaluating AI coding agents on behavior-preserving JavaScript and React code decomposition.
 
 **Paper:** [RefactorBench-JS: Evaluating LLM Agents on Behavior-Preserving Code Decomposition](paper.pdf) ([source](paper.tex))
 
 ## Overview
 
-RefactorBench-JS consists of 123 scored JavaScript and React fixtures--spanning algorithmic logic, data modules, utility/API logic, web UI, and mobile UI--each paired with a hidden unit test suite. An agent's task is to refactor a given file into smaller, well-structured modules; its output is scored by executing the hidden tests against the refactored filesystem, directly measuring whether observable behavior was preserved.
+RefactorBench-JS consists of 123 scored JavaScript and React fixtures--spanning algorithmic logic, data modules, utility/API logic, web UI, and mobile UI--each paired with a hidden unit test suite. The benchmark asks whether an LLM-based coding agent can refactor a given file into smaller, well-structured modules while preserving observable behavior. An agent's output is scored by executing the hidden tests against the refactored filesystem.
 
 The benchmark is grounded in a simple principle: *behavioral preservation is a functional property, and functional properties are best verified by functional tests*.
 

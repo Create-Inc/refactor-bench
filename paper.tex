@@ -36,19 +36,19 @@
 
 % --- Abstract ---
 \begin{abstract}
-We introduce \textsc{RefactorBench}-JS, an open benchmark suite for measuring the ability of LLM agents to perform behavior-preserving code decomposition in JavaScript and React codebases. The benchmark consists of 123 scored fixtures---spanning algorithmic logic, data modules, utility/API logic, web UI, and mobile UI---each paired with a hidden unit test suite: hidden from the agent during evaluation, then released publicly for auditability. An agent's task is to refactor a given file into smaller, well-structured modules; its output is scored by executing the hidden tests against the refactored filesystem, directly measuring whether observable behavior was preserved. This design is grounded in a simple principle: \emph{behavioral preservation is a functional property, and functional properties are best verified by functional tests}---not by code similarity metrics, static analysis, or LLM-as-judge.
+We introduce \textsc{RefactorBench}-JS, an open benchmark for evaluating AI coding agents on behavior-preserving software maintenance tasks. The benchmark measures whether LLM agents can decompose large JavaScript and React files into smaller modules without changing observable behavior. It consists of 123 scored fixtures---spanning algorithmic logic, data modules, utility/API logic, web UI, and mobile UI---each paired with a hidden unit test suite: hidden from the agent during evaluation, then released publicly for auditability. An agent's output is scored by executing the hidden tests against the refactored filesystem, directly measuring whether behavior was preserved. This design is grounded in a simple principle: \emph{behavioral preservation is a functional property, and functional properties are best verified by functional tests}---not by code similarity metrics, static analysis, or LLM-as-judge.
 
 We demonstrate \textsc{RefactorBench}-JS by evaluating Anthropic Claude and Google Gemini models across two tool configurations. The benchmark reveals model-dependent tool effects, large gaps between agent-reported success and actual behavioral preservation, and distinct failure modes across model families. We report hidden-test pass rates, calibration, operational metadata, and a failure taxonomy. These findings informed model and tool selection in a production refactoring system whose observed success rate improved from approximately $65\%$ to above $97\%$ amid multiple engineering changes; this production result is observational, not a controlled causal estimate. \textsc{RefactorBench}-JS is publicly available at \url{https://github.com/Create-Inc/refactor-bench}.
 \end{abstract}
 
 \medskip
-\noindent\textbf{Keywords:} benchmark, code refactoring, large language models, tool augmentation, agentic evaluation
+\noindent\textbf{Keywords:} AI agent evaluation, coding agents, benchmark, code refactoring, large language models, tool augmentation
 
 % ============================================================
 \section{Introduction}
 % ============================================================
 
-Automated code refactoring---restructuring code without changing its observable behavior---is an increasingly common task delegated to LLM-based agents. Yet evaluating whether an agent has actually preserved behavior remains an open problem. Existing approaches rely on metrics that are either too weak (compilation success, file count) or misaligned with the task (code similarity, LLM-as-judge). These metrics can show encouraging numbers even when the refactored code is functionally broken.
+AI coding agents are increasingly expected to carry out multi-step software engineering tasks, but evaluating their reliability remains difficult when success depends on preserving program behavior rather than producing plausible code. Automated refactoring---restructuring code without changing its observable behavior---is a particularly sharp test case: it requires an agent to edit, split, and reconnect code while keeping the user-visible system unchanged. Existing approaches rely on metrics that are either too weak (compilation success, file count) or misaligned with the task (code similarity, LLM-as-judge). These metrics can show encouraging numbers even when the refactored code is functionally broken.
 
 We encountered this problem firsthand while building an automated refactoring subagent for a commercial AI application builder. The subagent decomposes large React files into smaller modules to prevent downstream failures in speculative editing. Early evaluation using compilation success and file count metrics showed steady improvement---yet users reported broken applications after automatic refactoring. We could not distinguish a refactoring that compiled but broke behavior from one that was genuinely correct.
 
@@ -57,11 +57,11 @@ The solution was conceptually simple: \emph{behavioral preservation is a functio
 This paper introduces \textsc{RefactorBench}-JS, the public release of this evaluation suite. Our contributions are:
 
 \begin{enumerate}[leftmargin=2em]
-\item \textbf{Benchmark release}: \textsc{RefactorBench}-JS is an open benchmark of 123 scored JavaScript/React fixtures with hidden test suites, released at \url{https://github.com/Create-Inc/refactor-bench}.
+\item \textbf{AI-agent benchmark release}: \textsc{RefactorBench}-JS is an open benchmark of 123 scored JavaScript/React fixtures with hidden test suites for evaluating behavior preservation in LLM-based refactoring agents, released at \url{https://github.com/Create-Inc/refactor-bench}.
 
 \item \textbf{A behavior-grounded evaluation design}: we adapt the established software-engineering principle of functional regression testing to LLM refactoring agents, and contrast executable hidden tests with code similarity metrics, static analysis, and LLM-as-judge.
 
-\item \textbf{Baseline results, calibration, and failure analysis}: we evaluate seven frontier and fast models across two tool configurations and report hidden-test pass rates, agent self-evaluation calibration, operational cost/latency metadata, and failure buckets.
+\item \textbf{Agent performance baselines, calibration, and failure analysis}: we evaluate seven frontier and fast models across two tool configurations and report hidden-test pass rates, agent self-evaluation calibration, operational cost/latency metadata, and failure buckets.
 \end{enumerate}
 
 % ============================================================
