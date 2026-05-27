@@ -511,7 +511,7 @@ Mobile/native runtime behavior & 25/86 \\
 \end{tabular}
 \end{table}
 
-\noindent The public test contracts clarify what agents are breaking in the zero-pass tier. For example, the hardest \texttt{expense\_tracker} fixture has 111 tests and 174 assertions covering sidebar navigation, transaction modals, filtering, sorting, localStorage persistence, export behavior, and computed financial summaries. \texttt{financial\_portfolio} checks portfolio totals, sector and asset allocation, watchlists, alerts, filtering, sorting, and transaction forms. Mobile fixtures such as \texttt{grocery\_mobile\_app} and \texttt{sports\_schedule} add authentication state, router behavior, mocked API calls, accessibility labels, and async loading states. Thus the zero-pass tier fails because agents do not preserve a dense graph of coupled UI, state, module, and side-effect contracts after decomposition.
+\noindent The public test contracts clarify what agents are breaking in the zero-pass tier. For example, the hardest \texttt{expense\_tracker} fixture has 111 tests and 174 assertions covering sidebar navigation, transaction modals, filtering, sorting, localStorage persistence, export behavior, and computed financial summaries. \texttt{financial\_portfolio} checks portfolio totals, sector and asset allocation, watchlists, alerts, filtering, sorting, and transaction forms. Mobile fixtures such as \texttt{grocery\_mobile\_app} and \texttt{sports\_schedule} add authentication state, router behavior, mocked API calls, accessibility labels, and async loading states. Thus the zero-pass tier fails because agents do not preserve many interdependent UI, state, module, and side-effect behaviors after decomposition.
 
 \subsection{Analysis}
 
