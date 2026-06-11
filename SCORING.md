@@ -38,7 +38,7 @@ The paper reports additional fields when available:
 | Agent Reported Success | Whether the agent signaled successful completion. |
 | Non-Triviality | Whether the result created at least one new file instead of being a no-op. A no-op can still be compiled or tested, but it is bucketed separately as `Non-triviality failure` when the hidden tests do not pass. |
 | Files Compiled | `1 - build_errors / total_files`, as emitted by the harness. |
-| Cost | LLM cost in dollars for the attempt. |
+| Token Consumption | Prompt + completion tokens consumed by the attempt, when available. |
 
 These scores are diagnostic. Hidden-test pass/fail remains the primary correctness metric.
 

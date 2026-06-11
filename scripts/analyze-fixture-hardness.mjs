@@ -41,8 +41,19 @@ function csvEscape(value) {
 }
 
 function toNumber(value) {
+  if (value === null || value === undefined || value === "") return null;
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
+}
+
+function totalTokens(row) {
+  const explicitTotal = toNumber(row.total_tokens);
+  if (explicitTotal !== null) return explicitTotal;
+
+  const promptTokens = toNumber(row.prompt_tokens);
+  const completionTokens = toNumber(row.completion_tokens);
+  if (promptTokens === null || completionTokens === null) return null;
+  return promptTokens + completionTokens;
 }
 
 function loadFixtureMetadata(fixture) {
@@ -100,8 +111,8 @@ for (const row of rows) {
       failures: 0,
       durationSum: 0,
       durationCount: 0,
-      costSum: 0,
-      costCount: 0,
+      tokenSum: 0,
+      tokenCount: 0,
       failureBuckets: new Map(),
     });
   }
@@ -109,7 +120,7 @@ for (const row of rows) {
   const summary = byFixture.get(fixture);
   const passed = Number(row.passes_tests) === 1;
   const durationMin = toNumber(row.duration_min);
-  const costUsd = toNumber(row.refactoring_cost_usd);
+  const tokens = totalTokens(row);
 
   summary.conditions++;
   summary.passes += passed ? 1 : 0;
@@ -120,9 +131,9 @@ for (const row of rows) {
     summary.durationCount++;
   }
 
-  if (costUsd !== null) {
-    summary.costSum += costUsd;
-    summary.costCount++;
+  if (tokens !== null) {
+    summary.tokenSum += tokens;
+    summary.tokenCount++;
   }
 
   if (!passed) {
@@ -153,7 +164,8 @@ const outputHeaders = [
   "pass_rate",
   "failure_rate",
   "avg_duration_min",
-  "avg_cost_usd",
+  "avg_total_tokens",
+  "token_usage_count",
   "top_failure_bucket",
   "top_failure_bucket_count",
   "failure_bucket_counts",
@@ -183,9 +195,10 @@ const outputRows = ranked.map((summary, index) => {
     avg_duration_min: summary.durationCount
       ? (summary.durationSum / summary.durationCount).toFixed(2)
       : "",
-    avg_cost_usd: summary.costCount
-      ? (summary.costSum / summary.costCount).toFixed(4)
+    avg_total_tokens: summary.tokenCount
+      ? Math.round(summary.tokenSum / summary.tokenCount)
       : "",
+    token_usage_count: summary.tokenCount,
     top_failure_bucket: topBucket,
     top_failure_bucket_count: topBucketCount,
     failure_bucket_counts: failureBucketCounts,

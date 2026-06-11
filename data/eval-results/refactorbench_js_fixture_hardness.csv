@@ -1,124 +1,124 @@
-rank,fixture,fixture_category,target_file,target_loc,conditions,passes,failures,pass_rate,failure_rate,avg_duration_min,avg_cost_usd,top_failure_bucket,top_failure_bucket_count,failure_bucket_counts
-1,expense_tracker,React web UI,app/page.tsx,3769,14,0,14,0.0000,1.0000,43.77,0.0000,Reported non-success,14,Reported non-success:14
-2,grocery_mobile_app,Mobile / React Native,app/index.jsx,1648,14,0,14,0.0000,1.0000,28.74,0.0000,Reported non-success,14,Reported non-success:14
-3,sports_schedule,Mobile / React Native,app/schedule.jsx,1287,14,0,14,0.0000,1.0000,24.23,1.1756,Reported non-success,12,Reported non-success:12; DOM/query/UI mismatch:1; Non-triviality failure:1
-4,wave_chat,React web UI,app/page.jsx,1953,14,0,14,0.0000,1.0000,22.99,0.1208,Reported non-success,13,Reported non-success:13; Module import/export failure:1
-5,learning_journey,Mobile / React Native,app/[assignmentId].jsx,1007,14,0,14,0.0000,1.0000,21.78,1.5476,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
-6,mobile_game,Mobile / React Native,app/game.jsx,289,14,0,14,0.0000,1.0000,18.50,1.8082,Reported non-success,10,Reported non-success:10; Module import/export failure:3; Non-triviality failure:1
-7,seo_platforms_data,Utility/API,app/platforms.js,962,14,0,14,0.0000,1.0000,16.54,1.1974,Assertion-level behavior mismatch,11,Assertion-level behavior mismatch:11; Reported non-success:3
-8,financial_search,Mobile / React Native,app/search.jsx,925,14,0,14,0.0000,1.0000,16.00,0.6815,Reported non-success,11,Reported non-success:11; DOM/query/UI mismatch:2; Runtime reference/type error:1
-9,block_blast_game,Mobile / React Native,app/BlockBlastGame.jsx,509,14,0,14,0.0000,1.0000,15.80,0.8820,Reported non-success,9,Reported non-success:9; DOM/query/UI mismatch:4; Module import/export failure:1
-10,financial_portfolio,React web UI,app/page.jsx,998,14,0,14,0.0000,1.0000,15.57,2.9002,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-11,event_planner,Mobile / React Native,screens/HomeScreen.jsx,1826,14,0,14,0.0000,1.0000,15.38,2.4266,Module import/export failure,9,Module import/export failure:9; Reported non-success:5
-12,sports_admin_panel,Mobile / React Native,app/admin-panel.jsx,882,14,0,14,0.0000,1.0000,14.65,1.2408,Reported non-success,8,Reported non-success:8; Module import/export failure:6
-13,travel_itinerary_planner,React web UI,app/page.jsx,1478,14,0,14,0.0000,1.0000,13.98,1.2418,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
-14,seo_tool_page,React web UI,app/ToolPage.jsx,970,14,0,14,0.0000,1.0000,13.27,1.9882,Reported non-success,8,Reported non-success:8; DOM/query/UI mismatch:5; Assertion-level behavior mismatch:1
-15,financial_analytics_dashboard,React web UI,app/page.jsx,3428,14,0,14,0.0000,1.0000,13.20,3.1464,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-16,pet_service_request,Mobile / React Native,app/service-request.jsx,328,14,0,14,0.0000,1.0000,13.10,1.6684,Reported non-success,9,Reported non-success:9; Module import/export failure:5
-17,enhanced_chat_screen,React web UI,app/EnhancedChatScreen.jsx,741,14,0,14,0.0000,1.0000,13.04,0.8990,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
-18,property_listing_wizard,React web UI,app/page.jsx,1501,14,0,14,0.0000,1.0000,13.03,1.9658,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-19,ecommerce_storefront,React web UI,app/page.jsx,4163,14,0,14,0.0000,1.0000,12.41,1.1447,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
-20,chat_application,React web UI,app/page.jsx,2166,14,0,14,0.0000,1.0000,12.23,1.9729,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-21,real_estate_listings,React web UI,app/page.jsx,2585,14,0,14,0.0000,1.0000,11.47,3.5801,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-22,inventory_admin,React web UI,app/page.jsx,1253,14,0,14,0.0000,1.0000,11.17,1.9709,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-23,health_clinic_booking,React web UI,app/page.jsx,1065,14,0,14,0.0000,1.0000,11.14,1.8376,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
-24,social_media_feed,React web UI,app/page.jsx,1152,14,0,14,0.0000,1.0000,10.76,2.3824,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-25,large_landing_page,React web UI,app/page.jsx,678,14,0,14,0.0000,1.0000,10.74,0.8974,Module import/export failure,11,Module import/export failure:11; Reported non-success:3
-26,survey_analytics_dashboard,React web UI,app/page.jsx,1397,14,0,14,0.0000,1.0000,10.63,1.3646,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-27,video_streaming_platform,React web UI,app/page.jsx,2703,14,0,14,0.0000,1.0000,10.56,2.2756,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-28,music_streaming_player,React web UI,app/page.jsx,1314,14,0,14,0.0000,1.0000,10.38,2.8335,Syntax or parse failure,13,Syntax or parse failure:13; Reported non-success:1
-29,fitness_class_booking,React web UI,app/page.jsx,1072,14,0,14,0.0000,1.0000,10.30,2.6073,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-30,property_management,React web UI,app/page.jsx,1070,14,0,14,0.0000,1.0000,10.15,1.4858,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
-31,analytics_dashboard,React web UI,app/page.jsx,1604,14,0,14,0.0000,1.0000,10.14,1.9316,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-32,hurode_raya_landing,React web UI,app/page.jsx,1159,14,0,14,0.0000,1.0000,10.03,1.9275,Module import/export failure,9,Module import/export failure:9; Reported non-success:5
-33,content_scheduler,React web UI,app/page.jsx,980,14,0,14,0.0000,1.0000,10.01,1.7204,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-34,appointment_scheduler,React web UI,app/page.jsx,966,14,0,14,0.0000,1.0000,9.94,1.5063,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-35,music_streaming_app,React web UI,app/page.jsx,1044,14,0,14,0.0000,1.0000,9.89,2.4327,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-36,event_detail,React web UI,app/EventDetailView.jsx,353,14,0,14,0.0000,1.0000,9.84,1.1052,Reported non-success,5,Reported non-success:5; DOM/query/UI mismatch:4; Module import/export failure:3; Non-triviality failure:1; Runtime reference/type error:1
-37,online_store,React web UI,app/page.jsx,954,14,0,14,0.0000,1.0000,9.75,2.8867,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-38,family_plan,Mobile / React Native,app/family-plan.jsx,615,14,0,14,0.0000,1.0000,9.75,0.0939,Reported non-success,13,Reported non-success:13; DOM/query/UI mismatch:1
-39,realtime_chat_app,React web UI,app/page.jsx,1273,14,0,14,0.0000,1.0000,9.73,1.4086,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
-40,activity_tracker,Mobile / React Native,app/activity.jsx,676,14,0,14,0.0000,1.0000,9.60,0.6590,Reported non-success,8,Reported non-success:8; Module import/export failure:6
-41,chat_messenger,React web UI,app/page.jsx,1444,14,0,14,0.0000,1.0000,9.60,1.7714,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-42,healthcare_appointment_booking,Mobile / React Native,app/page.jsx,1903,14,0,14,0.0000,1.0000,9.59,2.3449,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-43,recipe_manager,Mobile / React Native,screens/HomeScreen.jsx,2000,14,0,14,0.0000,1.0000,9.57,1.9941,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-44,social_media_dashboard,React web UI,app/page.jsx,1147,14,0,14,0.0000,1.0000,9.30,2.4688,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-45,event_conference_manager,React web UI,app/page.jsx,4218,14,0,14,0.0000,1.0000,9.27,4.3273,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-46,wallet_profile,Mobile / React Native,app/profile.jsx,645,14,0,14,0.0000,1.0000,9.18,0.5130,Reported non-success,12,Reported non-success:12; Module import/export failure:1; Non-triviality failure:1
-47,fitness_tracker,React web UI,app/page.jsx,1395,14,0,14,0.0000,1.0000,9.08,1.2675,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
-48,social_media_analytics,React web UI,app/page.jsx,1641,14,0,14,0.0000,1.0000,9.00,2.8684,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-49,game_creator_form,Mobile / React Native,app/add-game.jsx,751,14,0,14,0.0000,1.0000,9.00,3.3622,DOM/query/UI mismatch,6,DOM/query/UI mismatch:6; Reported non-success:4; Module import/export failure:3; Other hidden-test failure:1
-50,referral_system,Mobile / React Native,app/referral.jsx,624,14,0,14,0.0000,1.0000,8.98,0.3201,Reported non-success,12,Reported non-success:12; Module import/export failure:2
-51,event_registration,React web UI,app/page.jsx,1386,14,0,14,0.0000,1.0000,8.91,0.8634,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
-52,patient_management,React web UI,app/page.jsx,788,14,0,14,0.0000,1.0000,8.85,2.5707,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-53,recipe_meal_planner,React web UI,app/page.jsx,1268,14,0,14,0.0000,1.0000,8.83,2.0635,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-54,real_estate_marketplace,React web UI,app/page.jsx,797,14,0,14,0.0000,1.0000,8.81,1.8689,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-55,music_player,React web UI,app/page.jsx,1210,14,0,14,0.0000,1.0000,8.71,2.0786,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-56,survey_quiz_builder,React web UI,app/page.jsx,1302,14,0,14,0.0000,1.0000,8.57,1.5867,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-57,recipe_sharing_app,Mobile / React Native,screens/HomeScreen.jsx,1643,14,0,14,0.0000,1.0000,8.56,2.1759,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-58,collaborative_doc_editor,React web UI,app/page.jsx,1164,14,0,14,0.0000,1.0000,8.38,1.6761,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-59,grocery_actions_hook,Mobile / React Native,app/useGroceryActions.js,312,14,0,14,0.0000,1.0000,8.30,2.1433,Reported non-success,8,Reported non-success:8; Module import/export failure:6
-60,meal_planner_mobile,Mobile / React Native,screens/HomeScreen.jsx,2597,14,0,14,0.0000,1.0000,8.20,1.4325,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
-61,ai_command_processor,Utility/API,app/commandProcessor.js,402,14,0,14,0.0000,1.0000,8.03,0.5183,Reported non-success,10,Reported non-success:10; Module import/export failure:2; Runtime reference/type error:2
-62,collaborative_whiteboard,React web UI,app/page.jsx,1275,14,0,14,0.0000,1.0000,7.90,1.6370,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-63,favorite_stores,Mobile / React Native,app/favorite-stores.jsx,227,14,0,14,0.0000,1.0000,7.76,0.5271,Reported non-success,12,Reported non-success:12; Module import/export failure:2
-64,social_media_app,Mobile / React Native,screens/HomeScreen.jsx,1927,14,0,14,0.0000,1.0000,7.67,2.1112,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-65,budget_expense_tracker,React web UI,app/page.jsx,1204,14,0,14,0.0000,1.0000,7.56,1.7127,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-66,community_forum,React web UI,app/page.jsx,2337,14,0,14,0.0000,1.0000,7.45,1.5071,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
-67,patient_portal,React web UI,app/page.jsx,3350,14,0,14,0.0000,1.0000,7.30,3.4250,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-68,recipe_app,Mobile / React Native,screens/HomeScreen.jsx,1570,14,0,14,0.0000,1.0000,7.19,2.6187,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-69,beauty_shop_mobile,Mobile / React Native,app/(tabs)/tips.jsx,513,14,0,14,0.0000,1.0000,6.97,0.6598,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
-70,job_board_platform,React web UI,app/page.jsx,892,14,0,14,0.0000,1.0000,6.94,1.9945,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-71,course_platform,React web UI,app/page.jsx,1389,14,0,14,0.0000,1.0000,6.57,1.8903,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
-72,job_board,React web UI,app/page.jsx,2467,14,0,14,0.0000,1.0000,6.13,3.5916,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-73,online_marketplace,React web UI,app/page.jsx,909,14,0,14,0.0000,1.0000,5.97,2.6226,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-74,quest_system,Mobile / React Native,app/quests.jsx,327,14,0,14,0.0000,1.0000,5.85,0.8679,Reported non-success,9,Reported non-success:9; DOM/query/UI mismatch:5
-75,taskflow,React web UI,app/page.jsx,668,14,0,14,0.0000,1.0000,5.76,0.9264,Module import/export failure,12,Module import/export failure:12; Reported non-success:2
-76,mobile_onboarding,Mobile / React Native,app/onboarding.jsx,399,14,0,14,0.0000,1.0000,5.65,1.5574,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
-77,budget_tracker,React web UI,app/page.jsx,1086,14,0,14,0.0000,1.0000,5.43,2.2883,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-78,property_listing_marketplace,React web UI,app/page.jsx,2855,14,0,14,0.0000,1.0000,5.39,2.9526,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-79,job_board_tracker,React web UI,app/page.jsx,1148,14,0,14,0.0000,1.0000,5.32,2.6502,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
-80,notification_center,React web UI,app/page.jsx,1067,14,0,14,0.0000,1.0000,5.14,2.2197,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
-81,seasonal_events,Mobile / React Native,app/seasonal-events.jsx,451,14,0,14,0.0000,1.0000,4.46,0.8843,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:6; Syntax or parse failure:1
-82,contact_section,React web UI,app/ContactSection.jsx,246,14,0,14,0.0000,1.0000,3.38,0.6094,DOM/query/UI mismatch,8,DOM/query/UI mismatch:8; Reported non-success:6
-83,forecast_dashboard,React web UI,app/ForecastDashboard.jsx,386,14,0,14,0.0000,1.0000,3.11,0.7611,Module import/export failure,13,Module import/export failure:13; Reported non-success:1
-84,team_dashboard,React web UI,app/TeamDashboard.jsx,387,14,0,14,0.0000,1.0000,3.06,0.7424,Module import/export failure,11,Module import/export failure:11; Reported non-success:3
-85,note_editor,React web UI,app/NoteEditorEnhanced.jsx,480,14,0,14,0.0000,1.0000,3.01,1.0145,Module import/export failure,11,Module import/export failure:11; Reported non-success:2; DOM/query/UI mismatch:1
-86,basic_web_with_auth,Utility/API,auth.js,357,14,0,14,0.0000,1.0000,2.13,0.8346,Module import/export failure,13,Module import/export failure:13; Reported non-success:1
-87,wallet_api,Utility/API,app/route.js,615,14,1,13,0.0714,0.9286,20.01,0.7137,Reported non-success,10,Reported non-success:10; Module import/export failure:3
-88,insurance_reports_api,Utility/API,app/route.js,267,14,1,13,0.0714,0.9286,10.02,1.1298,Module import/export failure,7,Module import/export failure:7; Reported non-success:3; DOM/query/UI mismatch:2; Non-triviality failure:1
-89,group_management,Mobile / React Native,app/[groupId].jsx,820,14,1,13,0.0714,0.9286,9.45,2.0407,Module import/export failure,13,Module import/export failure:13
-90,project_dashboard,React web UI,app/ProjectDashboard.jsx,361,14,1,13,0.0714,0.9286,3.12,0.8838,Module import/export failure,11,Module import/export failure:11; Reported non-success:2
-91,ai_code_mode,Utility/API,app/codeMode.js,291,14,2,12,0.1429,0.8571,23.77,1.3124,Reported non-success,7,Reported non-success:7; Module import/export failure:2; Non-triviality failure:2; DOM/query/UI mismatch:1
-92,grocery_list,Mobile / React Native,app/GroceryList.jsx,434,14,2,12,0.1429,0.8571,8.44,0.7735,Reported non-success,11,Reported non-success:11; DOM/query/UI mismatch:1
-93,resource_grid_row,React web UI,app/ResourceRow.jsx,233,14,2,12,0.1429,0.8571,3.98,1.1154,Module import/export failure,10,Module import/export failure:10; Reported non-success:2
-94,admin_panel,Mobile / React Native,app/admin.jsx,287,14,3,11,0.2143,0.7857,21.12,1.0126,Reported non-success,7,Reported non-success:7; Module import/export failure:2; DOM/query/UI mismatch:1; Non-triviality failure:1
-95,cv_builder,React web UI,app/page.jsx,304,14,3,11,0.2143,0.7857,8.96,1.1888,Reported non-success,10,Reported non-success:10; Non-triviality failure:1
-96,onboarding_flow,React web UI,app/page.jsx,243,14,3,11,0.2143,0.7857,6.26,1.0134,Reported non-success,5,Reported non-success:5; Module import/export failure:4; Non-triviality failure:2
-97,template_modal,React web UI,app/TemplateModal.jsx,244,14,3,11,0.2143,0.7857,2.53,1.4309,DOM/query/UI mismatch,5,DOM/query/UI mismatch:5; Assertion-level behavior mismatch:2; Reported non-success:2; Module import/export failure:1; Other hidden-test failure:1
-98,payments_hub,React web UI,app/PaymentsHub.jsx,281,14,4,10,0.2857,0.7143,11.14,1.5145,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:1; Module import/export failure:1; Runtime reference/type error:1
-99,tournament_manager,Mobile / React Native,app/tournaments.jsx,652,14,4,10,0.2857,0.7143,8.36,1.6363,Reported non-success,8,Reported non-success:8; Module import/export failure:1; Runtime reference/type error:1
-100,resume_viewer,React web UI,app/page.jsx,257,14,4,10,0.2857,0.7143,6.35,1.9642,Reported non-success,5,Reported non-success:5; Module import/export failure:4; Syntax or parse failure:1
-101,football_page,React web UI,app/page.jsx,193,14,4,10,0.2857,0.7143,4.91,0.7894,Reported non-success,7,Reported non-success:7; Module import/export failure:3
-102,game_results_handler,Mobile / React Native,app/gameResultsHandler.js,377,14,4,10,0.2857,0.7143,4.46,0.9462,Module import/export failure,5,Module import/export failure:5; Reported non-success:5
-103,mobile_scoreboard,Mobile / React Native,app/scoreboard.jsx,327,14,5,9,0.3571,0.6429,6.01,1.3771,Reported non-success,8,Reported non-success:8; Module import/export failure:1
-104,xrp_send_card,React web UI,app/SendXrpCard.jsx,259,14,5,9,0.3571,0.6429,5.46,1.2301,Reported non-success,6,Reported non-success:6; DOM/query/UI mismatch:2; Module import/export failure:1
-105,meal_tracker_form,React web UI,app/AddMealForm.jsx,267,14,5,9,0.3571,0.6429,4.01,0.5364,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:2
-106,team_members_settings,React web UI,app/TeamMembersTab.jsx,664,14,6,8,0.4286,0.5714,5.13,1.0867,DOM/query/UI mismatch,4,DOM/query/UI mismatch:4; Reported non-success:4
-107,flight_booking_modal,React web UI,app/FlightBookingModal.jsx,512,14,7,7,0.5000,0.5000,5.68,1.3962,Reported non-success,4,Reported non-success:4; DOM/query/UI mismatch:2; Assertion-level behavior mismatch:1
-108,health_goals_modal,React web UI,app/GoalsModal.jsx,205,14,12,2,0.8571,0.1429,1.79,0.8029,DOM/query/UI mismatch,2,DOM/query/UI mismatch:2
-109,seo_content_data,Algorithm/data,app/seo-content.js,329,14,13,1,0.9286,0.0714,2.95,0.6955,Runtime reference/type error,1,Runtime reference/type error:1
-110,ai_system_prompt,Utility/API,app/systemPrompt.js,101,14,13,1,0.9286,0.0714,2.15,1.1384,Assertion-level behavior mismatch,1,Assertion-level behavior mismatch:1
-111,account_codes_settings,React web UI,app/AccountCodesTab.jsx,245,14,13,1,0.9286,0.0714,1.96,0.4769,Runtime reference/type error,1,Runtime reference/type error:1
-112,loan_borrow_modal,Mobile / React Native,app/BorrowModal.jsx,357,14,13,1,0.9286,0.0714,1.70,0.9750,Other hidden-test failure,1,Other hidden-test failure:1
-113,rule_generator,Utility/API,app/useCases.js,285,14,13,1,0.9286,0.0714,0.98,0.4928,Runtime reference/type error,1,Runtime reference/type error:1
-114,n_queens,Algorithm/data,app/index.js,48,14,13,1,0.9286,0.0714,0.85,0.3382,Runtime reference/type error,1,Runtime reference/type error:1
-115,seo_keywords_data,Algorithm/data,app/long-tail-keywords.js,3096,14,14,0,1.0000,0.0000,24.65,0.7424,,,
-116,departments_settings,React web UI,app/DepartmentsTab.jsx,385,14,14,0,1.0000,0.0000,2.11,0.8674,,,
-117,app_constants,Utility/API,app/constants.js,215,14,14,0,1.0000,0.0000,1.26,0.6581,,,
-118,binary_search,Algorithm/data,app/index.js,98,14,14,0,1.0000,0.0000,1.15,0.3637,,,
-119,fibonacci_dp,Algorithm/data,app/index.js,127,14,14,0,1.0000,0.0000,0.86,0.5402,,,
-120,bfs_tree_traversal,Algorithm/data,app/index.js,55,14,14,0,1.0000,0.0000,0.81,0.3407,,,
-121,dfs_graph,Algorithm/data,app/index.js,94,14,14,0,1.0000,0.0000,0.74,0.4520,,,
-122,merge_sort,Algorithm/data,app/index.js,86,14,14,0,1.0000,0.0000,0.57,0.3790,,,
-123,dijkstra_shortest_path,Algorithm/data,app/index.js,140,14,14,0,1.0000,0.0000,0.55,0.3715,,,
+rank,fixture,fixture_category,target_file,target_loc,conditions,passes,failures,pass_rate,failure_rate,avg_duration_min,avg_total_tokens,token_usage_count,top_failure_bucket,top_failure_bucket_count,failure_bucket_counts
+1,expense_tracker,React web UI,app/page.tsx,3769,14,0,14,0.0000,1.0000,43.77,,0,Reported non-success,14,Reported non-success:14
+2,grocery_mobile_app,Mobile / React Native,app/index.jsx,1648,14,0,14,0.0000,1.0000,28.74,,0,Reported non-success,14,Reported non-success:14
+3,sports_schedule,Mobile / React Native,app/schedule.jsx,1287,14,0,14,0.0000,1.0000,24.23,2265794,2,Reported non-success,12,Reported non-success:12; DOM/query/UI mismatch:1; Non-triviality failure:1
+4,wave_chat,React web UI,app/page.jsx,1953,14,0,14,0.0000,1.0000,22.99,353696,1,Reported non-success,13,Reported non-success:13; Module import/export failure:1
+5,learning_journey,Mobile / React Native,app/[assignmentId].jsx,1007,14,0,14,0.0000,1.0000,21.78,743074,7,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
+6,mobile_game,Mobile / React Native,app/game.jsx,289,14,0,14,0.0000,1.0000,18.50,1525206,4,Reported non-success,10,Reported non-success:10; Module import/export failure:3; Non-triviality failure:1
+7,seo_platforms_data,Utility/API,app/platforms.js,962,14,0,14,0.0000,1.0000,16.54,397743,11,Assertion-level behavior mismatch,11,Assertion-level behavior mismatch:11; Reported non-success:3
+8,financial_search,Mobile / React Native,app/search.jsx,925,14,0,14,0.0000,1.0000,16.00,595620,3,Reported non-success,11,Reported non-success:11; DOM/query/UI mismatch:2; Runtime reference/type error:1
+9,block_blast_game,Mobile / React Native,app/BlockBlastGame.jsx,509,14,0,14,0.0000,1.0000,15.80,869630,5,Reported non-success,9,Reported non-success:9; DOM/query/UI mismatch:4; Module import/export failure:1
+10,financial_portfolio,React web UI,app/page.jsx,998,14,0,14,0.0000,1.0000,15.57,1352870,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+11,event_planner,Mobile / React Native,screens/HomeScreen.jsx,1826,14,0,14,0.0000,1.0000,15.38,1397130,9,Module import/export failure,9,Module import/export failure:9; Reported non-success:5
+12,sports_admin_panel,Mobile / React Native,app/admin-panel.jsx,882,14,0,14,0.0000,1.0000,14.65,651616,6,Reported non-success,8,Reported non-success:8; Module import/export failure:6
+13,enhanced_chat_screen,React web UI,app/EnhancedChatScreen.jsx,741,14,0,14,0.0000,1.0000,14.04,585938,7,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
+14,travel_itinerary_planner,React web UI,app/page.jsx,1478,14,0,14,0.0000,1.0000,13.98,1168109,5,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
+15,seo_tool_page,React web UI,app/ToolPage.jsx,970,14,0,14,0.0000,1.0000,13.27,1125545,6,Reported non-success,8,Reported non-success:8; DOM/query/UI mismatch:5; Assertion-level behavior mismatch:1
+16,financial_analytics_dashboard,React web UI,app/page.jsx,3428,14,0,14,0.0000,1.0000,13.20,1090198,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+17,pet_service_request,Mobile / React Native,app/service-request.jsx,328,14,0,14,0.0000,1.0000,13.10,1019300,5,Reported non-success,9,Reported non-success:9; Module import/export failure:5
+18,property_listing_wizard,React web UI,app/page.jsx,1501,14,0,14,0.0000,1.0000,13.03,1238999,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+19,ecommerce_storefront,React web UI,app/page.jsx,4163,14,0,14,0.0000,1.0000,12.41,1632776,5,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
+20,chat_application,React web UI,app/page.jsx,2166,14,0,14,0.0000,1.0000,12.23,1087096,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+21,real_estate_listings,React web UI,app/page.jsx,2585,14,0,14,0.0000,1.0000,11.47,1631743,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+22,inventory_admin,React web UI,app/page.jsx,1253,14,0,14,0.0000,1.0000,11.17,1054980,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+23,health_clinic_booking,React web UI,app/page.jsx,1065,14,0,14,0.0000,1.0000,11.14,1092690,6,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+24,social_media_feed,React web UI,app/page.jsx,1152,14,0,14,0.0000,1.0000,10.76,1520084,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+25,large_landing_page,React web UI,app/page.jsx,678,14,0,14,0.0000,1.0000,10.74,344926,11,Module import/export failure,11,Module import/export failure:11; Reported non-success:3
+26,survey_analytics_dashboard,React web UI,app/page.jsx,1397,14,0,14,0.0000,1.0000,10.63,893468,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+27,video_streaming_platform,React web UI,app/page.jsx,2703,14,0,14,0.0000,1.0000,10.56,1195617,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+28,music_streaming_player,React web UI,app/page.jsx,1314,14,0,14,0.0000,1.0000,10.38,756179,13,Syntax or parse failure,13,Syntax or parse failure:13; Reported non-success:1
+29,fitness_class_booking,React web UI,app/page.jsx,1072,14,0,14,0.0000,1.0000,10.30,1018296,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+30,property_management,React web UI,app/page.jsx,1070,14,0,14,0.0000,1.0000,10.15,1580850,6,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+31,analytics_dashboard,React web UI,app/page.jsx,1604,14,0,14,0.0000,1.0000,10.14,1139213,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+32,hurode_raya_landing,React web UI,app/page.jsx,1159,14,0,14,0.0000,1.0000,10.03,919263,9,Module import/export failure,9,Module import/export failure:9; Reported non-success:5
+33,content_scheduler,React web UI,app/page.jsx,980,14,0,14,0.0000,1.0000,10.01,942731,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+34,appointment_scheduler,React web UI,app/page.jsx,966,14,0,14,0.0000,1.0000,9.94,1030469,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+35,music_streaming_app,React web UI,app/page.jsx,1044,14,0,14,0.0000,1.0000,9.89,1440838,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+36,event_detail,React web UI,app/EventDetailView.jsx,353,14,0,14,0.0000,1.0000,9.84,442910,9,Reported non-success,5,Reported non-success:5; DOM/query/UI mismatch:4; Module import/export failure:3; Non-triviality failure:1; Runtime reference/type error:1
+37,online_store,React web UI,app/page.jsx,954,14,0,14,0.0000,1.0000,9.75,1380609,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+38,family_plan,Mobile / React Native,app/family-plan.jsx,615,14,0,14,0.0000,1.0000,9.75,491736,1,Reported non-success,13,Reported non-success:13; DOM/query/UI mismatch:1
+39,realtime_chat_app,React web UI,app/page.jsx,1273,14,0,14,0.0000,1.0000,9.73,1479394,6,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+40,activity_tracker,Mobile / React Native,app/activity.jsx,676,14,0,14,0.0000,1.0000,9.60,447909,6,Reported non-success,8,Reported non-success:8; Module import/export failure:6
+41,chat_messenger,React web UI,app/page.jsx,1444,14,0,14,0.0000,1.0000,9.60,834896,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+42,healthcare_appointment_booking,Mobile / React Native,app/page.jsx,1903,14,0,14,0.0000,1.0000,9.59,1175267,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+43,recipe_manager,Mobile / React Native,screens/HomeScreen.jsx,2000,14,0,14,0.0000,1.0000,9.57,1023167,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+44,social_media_dashboard,React web UI,app/page.jsx,1147,14,0,14,0.0000,1.0000,9.30,1171046,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+45,event_conference_manager,React web UI,app/page.jsx,4218,14,0,14,0.0000,1.0000,9.27,1774141,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+46,wallet_profile,Mobile / React Native,app/profile.jsx,645,14,0,14,0.0000,1.0000,9.18,808783,2,Reported non-success,12,Reported non-success:12; Module import/export failure:1; Non-triviality failure:1
+47,fitness_tracker,React web UI,app/page.jsx,1395,14,0,14,0.0000,1.0000,9.08,1453082,6,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+48,social_media_analytics,React web UI,app/page.jsx,1641,14,0,14,0.0000,1.0000,9.00,1213249,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+49,game_creator_form,Mobile / React Native,app/add-game.jsx,751,14,0,14,0.0000,1.0000,9.00,1109408,10,DOM/query/UI mismatch,6,DOM/query/UI mismatch:6; Reported non-success:4; Module import/export failure:3; Other hidden-test failure:1
+50,referral_system,Mobile / React Native,app/referral.jsx,624,14,0,14,0.0000,1.0000,8.98,461351,2,Reported non-success,12,Reported non-success:12; Module import/export failure:2
+51,event_registration,React web UI,app/page.jsx,1386,14,0,14,0.0000,1.0000,8.91,885880,5,Reported non-success,9,Reported non-success:9; Syntax or parse failure:5
+52,patient_management,React web UI,app/page.jsx,788,14,0,14,0.0000,1.0000,8.85,1155788,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+53,recipe_meal_planner,React web UI,app/page.jsx,1268,14,0,14,0.0000,1.0000,8.83,965065,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+54,real_estate_marketplace,React web UI,app/page.jsx,797,14,0,14,0.0000,1.0000,8.81,1153628,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+55,music_player,React web UI,app/page.jsx,1210,14,0,14,0.0000,1.0000,8.71,1585230,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+56,survey_quiz_builder,React web UI,app/page.jsx,1302,14,0,14,0.0000,1.0000,8.57,1251102,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+57,recipe_sharing_app,Mobile / React Native,screens/HomeScreen.jsx,1643,14,0,14,0.0000,1.0000,8.56,1328225,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+58,collaborative_doc_editor,React web UI,app/page.jsx,1164,14,0,14,0.0000,1.0000,8.38,1147096,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+59,grocery_actions_hook,Mobile / React Native,app/useGroceryActions.js,312,14,0,14,0.0000,1.0000,8.30,1135294,6,Reported non-success,8,Reported non-success:8; Module import/export failure:6
+60,meal_planner_mobile,Mobile / React Native,screens/HomeScreen.jsx,2597,14,0,14,0.0000,1.0000,8.20,1311426,6,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+61,ai_command_processor,Utility/API,app/commandProcessor.js,402,14,0,14,0.0000,1.0000,8.03,441855,4,Reported non-success,10,Reported non-success:10; Module import/export failure:2; Runtime reference/type error:2
+62,collaborative_whiteboard,React web UI,app/page.jsx,1275,14,0,14,0.0000,1.0000,7.90,991553,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+63,favorite_stores,Mobile / React Native,app/favorite-stores.jsx,227,14,0,14,0.0000,1.0000,7.76,879093,2,Reported non-success,12,Reported non-success:12; Module import/export failure:2
+64,social_media_app,Mobile / React Native,screens/HomeScreen.jsx,1927,14,0,14,0.0000,1.0000,7.67,1471491,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+65,budget_expense_tracker,React web UI,app/page.jsx,1204,14,0,14,0.0000,1.0000,7.56,930447,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+66,community_forum,React web UI,app/page.jsx,2337,14,0,14,0.0000,1.0000,7.45,883041,7,Reported non-success,7,Reported non-success:7; Syntax or parse failure:7
+67,patient_portal,React web UI,app/page.jsx,3350,14,0,14,0.0000,1.0000,7.30,1285354,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+68,recipe_app,Mobile / React Native,screens/HomeScreen.jsx,1570,14,0,14,0.0000,1.0000,7.19,1153174,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+69,beauty_shop_mobile,Mobile / React Native,app/(tabs)/tips.jsx,513,14,0,14,0.0000,1.0000,6.97,478725,6,Reported non-success,8,Reported non-success:8; Syntax or parse failure:6
+70,job_board_platform,React web UI,app/page.jsx,892,14,0,14,0.0000,1.0000,6.94,984989,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+71,course_platform,React web UI,app/page.jsx,1389,14,0,14,0.0000,1.0000,6.57,1216745,8,Syntax or parse failure,8,Syntax or parse failure:8; Reported non-success:6
+72,job_board,React web UI,app/page.jsx,2467,14,0,14,0.0000,1.0000,6.13,1365589,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+73,online_marketplace,React web UI,app/page.jsx,909,14,0,14,0.0000,1.0000,5.97,962661,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+74,quest_system,Mobile / React Native,app/quests.jsx,327,14,0,14,0.0000,1.0000,5.85,602519,5,Reported non-success,9,Reported non-success:9; DOM/query/UI mismatch:5
+75,taskflow,React web UI,app/page.jsx,668,14,0,14,0.0000,1.0000,5.76,395388,12,Module import/export failure,12,Module import/export failure:12; Reported non-success:2
+76,mobile_onboarding,Mobile / React Native,app/onboarding.jsx,399,14,0,14,0.0000,1.0000,5.65,712346,7,Module import/export failure,7,Module import/export failure:7; Reported non-success:7
+77,budget_tracker,React web UI,app/page.jsx,1086,14,0,14,0.0000,1.0000,5.43,1293276,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+78,property_listing_marketplace,React web UI,app/page.jsx,2855,14,0,14,0.0000,1.0000,5.39,1577858,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+79,job_board_tracker,React web UI,app/page.jsx,1148,14,0,14,0.0000,1.0000,5.32,1139896,9,Syntax or parse failure,9,Syntax or parse failure:9; Reported non-success:5
+80,notification_center,React web UI,app/page.jsx,1067,14,0,14,0.0000,1.0000,5.14,786817,10,Syntax or parse failure,10,Syntax or parse failure:10; Reported non-success:4
+81,seasonal_events,Mobile / React Native,app/seasonal-events.jsx,451,14,0,14,0.0000,1.0000,4.46,457613,7,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:6; Syntax or parse failure:1
+82,contact_section,React web UI,app/ContactSection.jsx,246,14,0,14,0.0000,1.0000,3.38,300848,8,DOM/query/UI mismatch,8,DOM/query/UI mismatch:8; Reported non-success:6
+83,forecast_dashboard,React web UI,app/ForecastDashboard.jsx,386,14,0,14,0.0000,1.0000,3.11,260652,13,Module import/export failure,13,Module import/export failure:13; Reported non-success:1
+84,team_dashboard,React web UI,app/TeamDashboard.jsx,387,14,0,14,0.0000,1.0000,3.06,312237,11,Module import/export failure,11,Module import/export failure:11; Reported non-success:3
+85,note_editor,React web UI,app/NoteEditorEnhanced.jsx,480,14,0,14,0.0000,1.0000,3.01,356410,12,Module import/export failure,11,Module import/export failure:11; Reported non-success:2; DOM/query/UI mismatch:1
+86,basic_web_with_auth,Utility/API,auth.js,357,14,0,14,0.0000,1.0000,2.13,253212,13,Module import/export failure,13,Module import/export failure:13; Reported non-success:1
+87,wallet_api,Utility/API,app/route.js,615,14,1,13,0.0714,0.9286,20.01,688089,4,Reported non-success,10,Reported non-success:10; Module import/export failure:3
+88,insurance_reports_api,Utility/API,app/route.js,267,14,1,13,0.0714,0.9286,10.02,357533,11,Module import/export failure,7,Module import/export failure:7; Reported non-success:3; DOM/query/UI mismatch:2; Non-triviality failure:1
+89,group_management,Mobile / React Native,app/[groupId].jsx,820,14,1,13,0.0714,0.9286,9.45,481111,14,Module import/export failure,13,Module import/export failure:13
+90,project_dashboard,React web UI,app/ProjectDashboard.jsx,361,14,1,13,0.0714,0.9286,3.12,258698,12,Module import/export failure,11,Module import/export failure:11; Reported non-success:2
+91,ai_code_mode,Utility/API,app/codeMode.js,291,14,2,12,0.1429,0.8571,23.77,733155,7,Reported non-success,7,Reported non-success:7; Module import/export failure:2; Non-triviality failure:2; DOM/query/UI mismatch:1
+92,grocery_list,Mobile / React Native,app/GroceryList.jsx,434,14,2,12,0.1429,0.8571,8.44,878063,3,Reported non-success,11,Reported non-success:11; DOM/query/UI mismatch:1
+93,resource_grid_row,React web UI,app/ResourceRow.jsx,233,14,2,12,0.1429,0.8571,3.98,359659,12,Module import/export failure,10,Module import/export failure:10; Reported non-success:2
+94,admin_panel,Mobile / React Native,app/admin.jsx,287,14,3,11,0.2143,0.7857,21.12,600576,7,Reported non-success,7,Reported non-success:7; Module import/export failure:2; DOM/query/UI mismatch:1; Non-triviality failure:1
+95,cv_builder,React web UI,app/page.jsx,304,14,3,11,0.2143,0.7857,8.96,1312302,4,Reported non-success,10,Reported non-success:10; Non-triviality failure:1
+96,onboarding_flow,React web UI,app/page.jsx,243,14,3,11,0.2143,0.7857,6.26,455430,9,Reported non-success,5,Reported non-success:5; Module import/export failure:4; Non-triviality failure:2
+97,template_modal,React web UI,app/TemplateModal.jsx,244,14,3,11,0.2143,0.7857,2.53,457789,12,DOM/query/UI mismatch,5,DOM/query/UI mismatch:5; Assertion-level behavior mismatch:2; Reported non-success:2; Module import/export failure:1; Other hidden-test failure:1
+98,payments_hub,React web UI,app/PaymentsHub.jsx,281,14,4,10,0.2857,0.7143,11.14,873531,7,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:1; Module import/export failure:1; Runtime reference/type error:1
+99,tournament_manager,Mobile / React Native,app/tournaments.jsx,652,14,4,10,0.2857,0.7143,8.36,915735,6,Reported non-success,8,Reported non-success:8; Module import/export failure:1; Runtime reference/type error:1
+100,resume_viewer,React web UI,app/page.jsx,257,14,4,10,0.2857,0.7143,6.35,724444,9,Reported non-success,5,Reported non-success:5; Module import/export failure:4; Syntax or parse failure:1
+101,football_page,React web UI,app/page.jsx,193,14,4,10,0.2857,0.7143,4.91,428726,7,Reported non-success,7,Reported non-success:7; Module import/export failure:3
+102,game_results_handler,Mobile / React Native,app/gameResultsHandler.js,377,14,4,10,0.2857,0.7143,4.46,521470,9,Module import/export failure,5,Module import/export failure:5; Reported non-success:5
+103,mobile_scoreboard,Mobile / React Native,app/scoreboard.jsx,327,14,5,9,0.3571,0.6429,6.01,754559,6,Reported non-success,8,Reported non-success:8; Module import/export failure:1
+104,xrp_send_card,React web UI,app/SendXrpCard.jsx,259,14,5,9,0.3571,0.6429,5.46,550761,8,Reported non-success,6,Reported non-success:6; DOM/query/UI mismatch:2; Module import/export failure:1
+105,meal_tracker_form,React web UI,app/AddMealForm.jsx,267,14,5,9,0.3571,0.6429,4.01,316647,7,Reported non-success,7,Reported non-success:7; DOM/query/UI mismatch:2
+106,team_members_settings,React web UI,app/TeamMembersTab.jsx,664,14,6,8,0.4286,0.5714,5.13,514239,10,DOM/query/UI mismatch,4,DOM/query/UI mismatch:4; Reported non-success:4
+107,flight_booking_modal,React web UI,app/FlightBookingModal.jsx,512,14,7,7,0.5000,0.5000,5.68,632889,10,Reported non-success,4,Reported non-success:4; DOM/query/UI mismatch:2; Assertion-level behavior mismatch:1
+108,health_goals_modal,React web UI,app/GoalsModal.jsx,205,14,12,2,0.8571,0.1429,1.79,272649,14,DOM/query/UI mismatch,2,DOM/query/UI mismatch:2
+109,seo_content_data,Algorithm/data,app/seo-content.js,329,14,13,1,0.9286,0.0714,2.95,244192,12,Runtime reference/type error,1,Runtime reference/type error:1
+110,ai_system_prompt,Utility/API,app/systemPrompt.js,101,14,13,1,0.9286,0.0714,2.15,312710,14,Assertion-level behavior mismatch,1,Assertion-level behavior mismatch:1
+111,account_codes_settings,React web UI,app/AccountCodesTab.jsx,245,14,13,1,0.9286,0.0714,1.96,147801,13,Runtime reference/type error,1,Runtime reference/type error:1
+112,loan_borrow_modal,Mobile / React Native,app/BorrowModal.jsx,357,14,13,1,0.9286,0.0714,1.70,288002,13,Other hidden-test failure,1,Other hidden-test failure:1
+113,rule_generator,Utility/API,app/useCases.js,285,14,13,1,0.9286,0.0714,0.98,163079,14,Runtime reference/type error,1,Runtime reference/type error:1
+114,n_queens,Algorithm/data,app/index.js,48,14,13,1,0.9286,0.0714,0.85,112505,14,Runtime reference/type error,1,Runtime reference/type error:1
+115,seo_keywords_data,Algorithm/data,app/long-tail-keywords.js,3096,14,14,0,1.0000,0.0000,24.65,1313377,4,,,
+116,departments_settings,React web UI,app/DepartmentsTab.jsx,385,14,14,0,1.0000,0.0000,2.11,311574,13,,,
+117,app_constants,Utility/API,app/constants.js,215,14,14,0,1.0000,0.0000,1.26,227123,13,,,
+118,binary_search,Algorithm/data,app/index.js,98,14,14,0,1.0000,0.0000,1.15,124571,14,,,
+119,fibonacci_dp,Algorithm/data,app/index.js,127,14,14,0,1.0000,0.0000,0.86,172145,14,,,
+120,bfs_tree_traversal,Algorithm/data,app/index.js,55,14,14,0,1.0000,0.0000,0.81,116566,14,,,
+121,dfs_graph,Algorithm/data,app/index.js,94,14,14,0,1.0000,0.0000,0.74,149659,14,,,
+122,merge_sort,Algorithm/data,app/index.js,86,14,14,0,1.0000,0.0000,0.57,126550,14,,,
+123,dijkstra_shortest_path,Algorithm/data,app/index.js,140,14,14,0,1.0000,0.0000,0.55,114206,14,,,

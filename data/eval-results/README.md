@@ -24,7 +24,7 @@ The committed artifacts preserve the reproducibility-safe fields needed to recom
 - agent-reported success
 - non-triviality and compile scores
 - duration
-- refactoring cost and token counts
+- token counts
 - file-count metadata
 - synthetic terminal-failure marker
 - failure bucket
@@ -47,9 +47,9 @@ The committed artifacts preserve the reproducibility-safe fields needed to recom
 | `failure_bucket` | enum | Heuristic failure class; `Passed` for successful rows. |
 | `duration_ms` | integer | Wall-clock attempt duration in milliseconds. |
 | `duration_min` | number | Wall-clock attempt duration in minutes. |
-| `refactoring_cost_usd` | number | LLM cost for the attempt, in USD. |
 | `prompt_tokens` | integer or blank | Prompt tokens when available. |
 | `completion_tokens` | integer or blank | Completion tokens when available. |
+| `total_tokens` | integer or blank | Prompt + completion tokens when both fields are available. |
 | `files_before` | integer | Number of files before refactoring, when available. |
 | `files_after` | integer | Number of files after refactoring, when available. |
 | `total_files_compiled` | integer | Number of files considered by the compile/static checker. |

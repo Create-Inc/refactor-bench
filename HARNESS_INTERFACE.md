@@ -84,7 +84,7 @@ To compare against the paper tables, a harness should export one row per `(model
 - non-triviality indicator, if available
 - compile/static score, if available
 - duration
-- token usage and cost, if available
+- token usage, if available
 - failure bucket, if applying the paper's heuristic taxonomy
 
 The committed `data/eval-results/refactorbench_js_full_run_per_fixture.csv` provides the concrete schema used for the paper baseline rows.

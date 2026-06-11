@@ -58,7 +58,7 @@ RefactorBench-JS produces five scores per refactoring attempt:
 | Agent Reported Success | Binary | Did the agent signal success via its termination tool? |
 | Non-Triviality | Binary | Did the refactoring produce new files (not a no-op)? |
 | Files Compiled | [0,1] | 1 - (build errors / total files) |
-| Cost | $ | Total LLM cost in dollars |
+| Token Consumption | Count | Prompt + completion tokens consumed by the attempt, when available |
 
 ## Citation
 

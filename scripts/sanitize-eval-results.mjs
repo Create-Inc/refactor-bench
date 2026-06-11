@@ -14,7 +14,7 @@ const SCORE_NAMES = {
   passes: "Passes Tests",
   nonTrivial: "Non Triviality",
   compiled: "Files Compiled",
-  cost: "Refactoring Cost",
+  usage: "Refactoring Cost",
 };
 
 const MODEL_LABELS = {
@@ -86,6 +86,11 @@ function stableMessage(score) {
   return typeof message === "string" ? message : "";
 }
 
+function sumTokens(promptTokens, completionTokens) {
+  if (promptTokens == null || completionTokens == null) return null;
+  return Number(promptTokens) + Number(completionTokens);
+}
+
 function classifyFailure(row) {
   if (row.passes_tests === 1) return "Passed";
   if (row.agent_reported_success !== 1) return "Reported non-success";
@@ -127,12 +132,14 @@ function classifyFailure(row) {
 
 function normalizeResult(fileName, experiment, result, scores) {
   const byName = scoreByName(scores, result.id);
-  const costScore = byName[SCORE_NAMES.cost];
+  const usageScore = byName[SCORE_NAMES.usage];
   const nonTrivialityScore = byName[SCORE_NAMES.nonTrivial];
   const compiledScore = byName[SCORE_NAMES.compiled];
   const reportedScore = byName[SCORE_NAMES.reported];
   const passesScore = byName[SCORE_NAMES.passes];
   const testRunner = parseTestRunner(experiment.experimentName ?? "");
+  const promptTokens = usageScore?.metadata?.tokenUsage?.promptTokens ?? null;
+  const completionTokens = usageScore?.metadata?.tokenUsage?.completionTokens ?? null;
 
   const row = {
     model_provider: experiment.portkeyProvider,
@@ -152,9 +159,9 @@ function normalizeResult(fileName, experiment, result, scores) {
     passes_tests: boolScore(passesScore),
     non_triviality: boolScore(nonTrivialityScore),
     files_compiled: compiledScore?.score ?? null,
-    refactoring_cost_usd: costScore?.metadata?.costInDollars ?? costScore?.score ?? null,
-    prompt_tokens: costScore?.metadata?.tokenUsage?.promptTokens ?? null,
-    completion_tokens: costScore?.metadata?.tokenUsage?.completionTokens ?? null,
+    prompt_tokens: promptTokens,
+    completion_tokens: completionTokens,
+    total_tokens: sumTokens(promptTokens, completionTokens),
     files_before: nonTrivialityScore?.metadata?.numberOfFilesBefore ?? null,
     files_after: nonTrivialityScore?.metadata?.numberOfFiles ?? compiledScore?.metadata?.totalFiles ?? null,
     total_files_compiled: compiledScore?.metadata?.totalFiles ?? null,
@@ -205,7 +212,8 @@ function summarize(rows) {
     const notReportedAndFailed = conditionRows.filter(
       (row) => row.agent_reported_success !== 1 && row.passes_tests !== 1,
     ).length;
-    const totalCost = conditionRows.reduce((sum, row) => sum + Number(row.refactoring_cost_usd ?? 0), 0);
+    const rowsWithTokens = conditionRows.filter((row) => row.total_tokens != null);
+    const totalTokens = rowsWithTokens.reduce((sum, row) => sum + Number(row.total_tokens), 0);
     const totalDuration = conditionRows.reduce((sum, row) => sum + Number(row.duration_ms ?? 0), 0);
     const [ciLow, ciHigh] = wilson(passes, n);
 
@@ -225,8 +233,9 @@ function summarize(rows) {
       agent_not_successful: n - reported,
       terminal_hidden_test_failures: notReportedAndFailed,
       avg_duration_min: Number((totalDuration / n / 60000).toFixed(4)),
-      total_cost_usd: Number(totalCost.toFixed(4)),
-      avg_cost_usd: Number((totalCost / n).toFixed(4)),
+      token_usage_count: rowsWithTokens.length,
+      avg_total_tokens: rowsWithTokens.length === 0 ? null : Math.round(totalTokens / rowsWithTokens.length),
+      total_tokens: totalTokens,
     });
   }
   return summaries.sort(compareRows);
@@ -289,9 +298,9 @@ const perFixtureColumns = [
   "failure_bucket",
   "duration_ms",
   "duration_min",
-  "refactoring_cost_usd",
   "prompt_tokens",
   "completion_tokens",
+  "total_tokens",
   "files_before",
   "files_after",
   "total_files_compiled",
@@ -317,8 +326,9 @@ const summaryColumns = [
   "agent_not_successful",
   "terminal_hidden_test_failures",
   "avg_duration_min",
-  "avg_cost_usd",
-  "total_cost_usd",
+  "token_usage_count",
+  "avg_total_tokens",
+  "total_tokens",
 ];
 
 const summaries = summarize(finalRows);
